@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDE Alive- Equipe</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <nav>
+            <a href="index.html" class="nav-logo-link">
+                <div class="nav-logo"> 
+                    <img src="./img/logo.png"> 
+                    BDE<span> Alive</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="equipe.html" class="active">Équipe</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="partenaires.html">Partenaires</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-orb"></div>
+            <div class="hero-bg-text">TEAM</div>
+
+            <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-left" alt="mascotte">
+            <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-right" alt="mascotte">
+
+            <div class="hero-content">
+                <div class="hero-eyebrow">BDE Alive — Promo 2025/2026</div>
+                <h1>Notre<br><em>Équipe</em></h1>
+                <p class="hero-desc">Ceux qui font tourner la machine. Du code aux soirées, chaque membre apporte sa patte à l'aventure du BDE Alive.</p>
+
+                <div class="hero-counts">
+                    <div class="count-item">
+                        <div class="count-num">{{ members.filter(m => m.isBureau).length }}</div>
+                        <div class="count-label">Bureau</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-num">{{ members.filter(m => !m.isBureau).length }}</div>
+                        <div class="count-label">Membres actifs</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-num">2</div>
+                        <div class="count-label">Promos</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="members-section">
+
+            <!-- ── BUREAU ── -->
+            <template v-if="groupBureau.length > 0">
+                <div class="bureau-label reveal">
+                    <span>Bureau exécutif</span>
+                </div>
+                <div class="bureau-grid">
+                    <div 
+                        v-for="(member, index) in groupBureau" 
+                        :key="member.id"
+                        class="member-card reveal" 
+                        :class="'reveal-delay-' + ((index % 5) + 1)"
+                    >
+                        <div class="card-glow"></div>
+                        <div class="card-photo" 
+                             :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">
+                                {{ getInitials(member.firstName, member.lastName) }}
+                            </div>
+                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-name">
+                                <span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}
+                            </div>
+                            <div class="card-promo">{{ member.promoText }}</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ── TRÉSORERIE ── -->
+            <template v-if="groupTreso.length > 0">
+                <div class="bureau-label reveal">
+                    <span>Trésorerie</span>
+                </div>
+                <div class="bureau-grid" v-if="groupTreso.filter(m => m.isResp).length > 0">
+                    <div v-for="(member, index) in groupTreso.filter(m => m.isResp)" :key="member.id"
+                        class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                        <div class="card-glow"></div>
+                        <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                            <div class="card-promo">{{ member.promoText }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="members-grid" v-if="groupTreso.filter(m => !m.isResp).length > 0">
+                    <div v-for="(member, index) in groupTreso.filter(m => !m.isResp)" :key="member.id"
+                        class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                        <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                            <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                        </div>
+                        <div class="card-body-sm">
+                            <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                            <div class="card-promo-sm">{{ member.promoText }}</div>
+                            <div class="card-role-sm" :class="member.roleClass">{{ member.role }}</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ── COMMUNICATION ── -->
+            <template v-if="groupComm.length > 0">
+                <div class="bureau-label reveal">
+                    <span>Communication</span>
+                </div>
+                <div class="bureau-grid" v-if="groupComm.filter(m => m.isResp).length > 0">
+                    <div v-for="(member, index) in groupComm.filter(m => m.isResp)" :key="member.id"
+                        class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                        <div class="card-glow"></div>
+                        <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                            <div class="card-promo">{{ member.promoText }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="members-grid" v-if="groupComm.filter(m => !m.isResp).length > 0">
+                    <div v-for="(member, index) in groupComm.filter(m => !m.isResp)" :key="member.id"
+                        class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                        <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                            <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                        </div>
+                        <div class="card-body-sm">
+                            <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                            <div class="card-promo-sm">{{ member.promoText }}</div>
+                            <div class="card-role-sm" :class="member.roleClass">{{ member.role }}</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ── ÉVÈNEMENTIEL ── -->
+            <template v-if="groupEvents.length > 0">
+                <div class="bureau-label reveal">
+                    <span>Évènementiel</span>
+                </div>
+                <div class="bureau-grid">
+                    <div v-for="(member, index) in groupEvents" :key="member.id"
+                        class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                        <div class="card-glow"></div>
+                        <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                            <div class="card-promo">{{ member.promoText }}</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ── MEMBRES ── -->
+            <template v-if="groupMembres.length > 0">
+                <div class="bureau-label reveal">
+                    <span>Membres actifs</span>
+                </div>
+                <div class="members-grid">
+                    <div 
+                        v-for="(member, index) in groupMembres" 
+                        :key="member.id"
+                        class="member-card-sm reveal"
+                        :class="'reveal-delay-' + ((index % 5) + 1)"
+                    >
+                        <div class="card-photo-sm" 
+                             :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                            <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">
+                                {{ getInitials(member.firstName, member.lastName) }}
+                            </div>
+                        </div>
+                        <div class="card-body-sm">
+                            <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                            <div class="card-promo-sm">{{ member.promoText }}</div>
+                            <div class="card-role-sm" :class="member.roleClass">{{ member.role }}</div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+        </main>
+
+        <footer>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="nav-logo">BDE <span>Alive</span></div>
+                    <p>Le BDE qui code autant qu'il fête. Rejoins-nous et fais partie de l'aventure informatique de ta promo.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="#equipe">Notre équipe</a></li>
+                            <li><a href="#projets">Projets</a></li>
+                            <li><a href="#soirees">Soirées</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Ressources</h4>
+                        <ul>
+                            <li><a href="https://www.instagram.com/bde.info.alive/" target="_blank">Instagram</a></li>
+                            <li><a href="https://discord.gg/yeB7ttZG3j" target="_blank">Discord</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Info</h4>
+                        <ul>
+                            <li><a href="index.html#contact">Devenir membre</a></li>
+                            <li><a href="#">Partenaires</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2025 BDE Alive — Tous droits réservés</span>
+                <div class="footer-socials">
+                    <a class="social-btn" href="https://discord.gg/yeB7ttZG3j"><i class="fa-brands fa-discord"></i></a>
+                    <a class="social-btn" href="https://www.instagram.com/bde.info.alive/"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <span>Made with Vue.js </span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    const { createApp, ref, computed, onMounted } = Vue;
+
+    createApp({
+        setup() {
+            const members = ref([
+                // --- BUREAU ---
+                { id: 1,  firstName: 'Paolo',    lastName: 'PERCHE',            promo: 'BUT2', promoText: '2 éme année', role: 'Président',          roleClass: 'role-president',   photo: './img/membres/Paolo.jpg',       isBureau: true,  group: 'bureau' },
+                { id: 2,  firstName: 'Romain',   lastName: 'LEFRANC',           promo: 'BUT2', promoText: '2 éme année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Romain.jpg',      isBureau: true,  group: 'bureau' },
+                { id: 3,  firstName: 'Gabin',    lastName: 'CHEVALIER',         promo: 'BUT2', promoText: '2 éme année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Gabin.jpg',       isBureau: true,  group: 'bureau' },
+                { id: 4,  firstName: 'Nathan',   lastName: 'LE HEBEL',          promo: 'BUT2', promoText: '2 éme année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Nathan.jpg',      isBureau: true,  group: 'bureau' },
+                { id: 7,  firstName: 'Gaëtan',   lastName: 'LOLLIERIC',         promo: 'BUT2', promoText: '2 éme année', role: 'Secrétaire',         roleClass: 'role-secretaire',  photo: './img/membres/Gaëtan.jpg',      isBureau: true,  group: 'bureau' },
+
+                // --- TRÉSORERIE ---
+                { id: 6,  firstName: 'Johan',    lastName: 'KERAUDREN',         promo: 'BUT2', promoText: '2 éme année', role: 'Resp. Trésorerie',   roleClass: 'role-treso',       photo: './img/membres/Johan.jpg',       isBureau: true,  group: 'treso',  isResp: true  },
+                { id: 15, firstName: 'Titouan',  lastName: 'LOUIS--RENAULT',    promo: 'BUT1', promoText: '1 er année',  role: 'Trésorier',          roleClass: 'role-treso',       photo: './img/membres/Titouan_L.jpg',   isBureau: false, group: 'treso',  isResp: false },
+                { id: 21, firstName: 'Thuân',    lastName: 'DANG',              promo: 'BUT1', promoText: '1 er année', role: 'Trésorier',           roleClass: 'role-treso',       photo: './img/membres/Thuan.jpg',       isBureau: false, group: 'treso',  isResp: false },
+
+                // --- COMMUNICATION ---
+                { id: 5,  firstName: 'Thélio',   lastName: 'BLEUZEN',           promo: 'BUT2', promoText: '2ème année', role: 'Resp. Communication', roleClass: 'role-comm',        photo: './img/membres/Thélio.jpg',      isBureau: true,  group: 'comm', isResp: true  },
+                { id: 12, firstName: 'Ewen',     lastName: 'SEVEN',             promo: 'BUT2', promoText: '2ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Ewen.jpg',        isBureau: false, group: 'comm', isResp: false },
+                { id: 22, firstName: 'Louennig', lastName: 'LE GALL',           promo: 'BUT2', promoText: '2ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Louennig.jpg',    isBureau: false, group: 'comm', isResp: false },
+                { id: 19, firstName: 'Mathis',   lastName: 'LOQUAIS',           promo: 'BUT2', promoText: '2ème année', role: 'Communication',       roleClass: 'role-comm',        photo: '',                              isBureau: false, group: 'comm', isResp: false },
+                { id: 24, firstName: 'Yanis',    lastName: 'GUERIF',            promo: 'BUT1', promoText: '1er année',  role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Yanis.jpg',       isBureau: false, group: 'comm', isResp: false },
+
+                // --- ÉVÈNEMENTIEL ---
+                { id: 8,  firstName: 'Titouan',  lastName: 'QUILLEVERE',        promo: 'BUT2', promoText: '2 éme année', role: 'Resp. Events',        roleClass: 'role-events',     photo: './img/membres/Titouan_Q.jpg',   isBureau: true,  group: 'events', isResp: true  },
+                { id: 9,  firstName: 'Yiwen',    lastName: 'KADRI',             promo: 'BUT2', promoText: '2 éme année', role: 'Resp. Events',        roleClass: 'role-events',     photo: './img/membres/Yiwen.jpg',       isBureau: true,  group: 'events', isResp: true  },
+
+                // --- MEMBRES ---
+                { id: 10, firstName: 'Clément',  lastName: 'BIGOUIN',           promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: './img/membres/Clément.jpg',     isBureau: false, group: 'membres' },
+                { id: 11, firstName: 'Lucien',   lastName: 'LE GOC',            promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 13, firstName: 'Baptiste', lastName: 'GAULTIER',          promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 14, firstName: 'Liam',     lastName: 'CHARPENTIER',       promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 16, firstName: 'Mael',     lastName: 'FOURRE',            promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 17, firstName: 'Léo',      lastName: 'TESSIER',           promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 18, firstName: 'Clément',  lastName: 'PHILIPPO',          promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 20, firstName: 'Guéwen',   lastName: 'MARÉCHAL',          promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 23, firstName: 'Edgar',    lastName: 'RODRIGUES MOREIRA', promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 25, firstName: 'Edouard',  lastName: 'LE LAY',            promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+            ]);
+
+            const getInitials = (first, last) => (first[0] + last[0]).toUpperCase();
+
+            // Groupes filtrés
+            const groupBureau  = computed(() => members.value.filter(m => m.group === 'bureau'));
+            const groupTreso   = computed(() => members.value.filter(m => m.group === 'treso'));
+            const groupComm    = computed(() => members.value.filter(m => m.group === 'comm'));
+            const groupEvents  = computed(() => members.value.filter(m => m.group === 'events'));
+            const groupMembres = computed(() => members.value.filter(m => m.group === 'membres'));
+
+            // Encore disponible pour les compteurs du hero
+            const filteredBureau = computed(() => members.value.filter(m => m.isBureau));
+            const filteredActifs = computed(() => members.value.filter(m => !m.isBureau));
+
+            const initObserver = () => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) e.target.classList.add('visible');
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            };
+
+            onMounted(() => initObserver());
+
+            return {
+                members,
+                groupBureau,
+                groupTreso,
+                groupComm,
+                groupEvents,
+                groupMembres,
+                filteredBureau,
+                filteredActifs,
+                getInitials
+            };
+        }
+    }).mount('#app');
+    </script>
+</body>
+</html>

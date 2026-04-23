@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDE Alive - Partenaires</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="index.html" class="nav-logo-link">
+            <div class="nav-logo">
+                <img src="./img/logo.png">
+                BDE<span> Alive</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="equipe.html">Équipe</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="partenaires.html" class="active">Partenaires</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-orb"></div>
+        <div class="hero-bg-text">DEAL</div>
+
+        <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-left" alt="mascotte">
+        <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-right" alt="mascotte">
+
+        <div class="hero-content">
+            <div class="hero-eyebrow">BDE Alive — Promo 2025/2026</div>
+            <h1>Nos<br><em>Partenaires</em></h1>
+            <p class="hero-desc">Ta carte BDE Alive, c'est ton pass pour des réductions exclusives. Restauration, sorties, services — ils sont là pour toi.</p>
+
+            <div class="hero-counts">
+                <div class="count-item">
+                    <div class="count-num">{{ partners.length }}</div>
+                    <div class="count-label">Partenaires</div>
+                </div>
+                <div class="count-item">
+                    <div class="count-num">{{ categories.length - 1 }}</div>
+                    <div class="count-label">Catégories</div>
+                </div>
+                <div class="count-item">
+                    <div class="count-num">20€</div>
+                    <div class="count-label">Carte BDE</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION PRINCIPALE -->
+    <main class="partenaires-section">
+
+        <!-- Filtres -->
+        <div class="partner-filters reveal">
+            <button
+                v-for="cat in categories"
+                :key="cat"
+                class="pf-btn"
+                :class="{ active: activeFilter === cat }"
+                @click="activeFilter = cat"
+            >{{ cat }}</button>
+        </div>
+
+        <!-- Grille -->
+        <div class="partners-grid-full">
+            <a
+                v-for="(partner, index) in filteredPartners"
+                :key="partner.name"
+                :href="partner.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="partner-card-full reveal"
+                :class="'reveal-delay-' + ((index % 5) + 1)"
+            >
+                <div class="pcf-glow"></div>
+
+                <!-- Bannière -->
+                <div class="pcf-banner" :style="{ background: partner.bannerBg }">
+                    <div class="pcf-banner-overlay"></div>
+                    <div class="pcf-banner-icon">
+                        <img v-if="partner.logo" :src="partner.logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+                        <i v-else :class="partner.icon" :style="{ color: partner.color }"></i>
+                    </div>
+                    <div class="pcf-category-badge">{{ partner.category }}</div>
+                    <i class="fa-solid fa-arrow-up-right-from-square pcf-arrow"></i>
+                </div>
+
+                <!-- Corps -->
+                <div class="pcf-body">
+                    <div class="pcf-name">{{ partner.name }}</div>
+                    <p class="pcf-desc">{{ partner.desc }}</p>
+                    <div class="pcf-offre">
+                        <i class="fa-solid fa-tag"></i>
+                        {{ partner.offre }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- CTA devenir partenaire -->
+        <div class="partner-become reveal">
+            <i class="fa-solid fa-handshake"></i>
+            <div class="partner-become-text">
+                <strong>Vous souhaitez devenir partenaire ?</strong>
+                <span>Rejoignez notre réseau et profitez d'une visibilité auprès de toute la filière informatique.</span>
+            </div>
+            <a href="index.html#contact" class="btn-outline" style="white-space: nowrap;">Nous contacter</a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="nav-logo">BDE <span>Alive</span></div>
+                <p>Le BDE qui code autant qu'il fête. Rejoins-nous et fais partie de l'aventure informatique de ta promo.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="equipe.html">Notre équipe</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="partenaires.html">Partenaires</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/bde.info.alive/" target="_blank">Instagram</a></li>
+                        <li><a href="https://discord.gg/yeB7ttZG3j" target="_blank">Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Devenir membre</a></li>
+                        <li><a href="partenaires.html">Partenaires</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 BDE Alive — Tous droits réservés</span>
+            <div class="footer-socials">
+                <a class="social-btn" href="https://discord.gg/yeB7ttZG3j"><i class="fa-brands fa-discord"></i></a>
+                <a class="social-btn" href="https://www.instagram.com/bde.info.alive/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <span>Made with Vue.js</span>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                activeFilter: 'Tous',
+                partners: [
+                    // ── RESTAURATION ──
+                    {
+                        name: 'KFC',
+                        icon: 'fa-solid fa-drumstick-bite',
+                        color: '#F40000',
+                        bannerBg: 'linear-gradient(135deg, #3D0000, #7A0A00)',
+                        category: 'Restauration',
+                        desc: 'Le temple du poulet frit croustillant où les seaux à partager et les recettes secrètes du Colonel ravissent les gourmands pressés',
+                        offre: '10% de réduction sur présentation de la carte BDE Alive',
+                        logo: './img/partenaires/kfc.webp',
+                        url: './partenaires/kfc.html'
+                    },
+                    {
+                        name: 'Le Diplomate',
+                        icon: 'fa-solid fa-martini-glass-citrus',
+                        color: '#FF007B',
+                        bannerBg: 'linear-gradient(135deg, #1A0A3D, #3B1A7A)',
+                        category: 'Bar',
+                        desc: 'Un repaire survitaminé où les étudiants se retrouvent pour décompresser autour de tarifs préférentiels sur les boissons.',
+                        offre: 'Réduction sur les Yaegerbombs et biéres avec la carte BDE Alive',
+                        logo: './img/partenaires/diplomate.webp',
+                        url: './partenaires/diplomate.html'
+                    },
+                    {
+                        name: 'Le Truc',
+                        icon: 'fa-solid fa-cocktail',
+                        color: '#FF8C00',
+                        bannerBg: 'linear-gradient(135deg, #2A1500, #5A3000)',
+                        category: 'Bar',
+                        desc: 'Le Truc Café, c\'est le bar à jeux de société du coin ! Seul ou à plusieurs, en plus des jeux, vous aurez le loisir de découvrir des produits locaux',
+                        offre: 'Réduction sur les cocktails du moments et biéres avec la carte BDE Alive',
+                        logo: './img/partenaires/truc.webp',
+                        url: './partenaires/truc.html'
+                    },
+                    {
+                        name: 'Le Chapelier',
+                        icon: 'fa-solid fa-print',
+                        color: '#00D4FF',
+                        bannerBg: 'linear-gradient(135deg, #00203A, #003D6B)',
+                        category: 'Bar',
+                        desc: 'Entre deux verres, un DJ enchaîne les sets rythmés pour transformer l\'espace en une piste de danse improvisée jusqu\'au bout de la nuit.',
+                        offre: 'Réduction sur les Yaegerbombs, biéres et punch avec la carte BDE Alive',
+                        logo: './img/partenaires/chapelier.webp',
+                        url: './partenaires/chapelier.html'
+                    },
+                    {
+                        name: 'le Barn\'s',
+                        icon: 'fa-solid fa-gamepad',
+                        color: '#5DCAA5',
+                        bannerBg: 'linear-gradient(135deg, #0D2B1A, #1A5233)',
+                        category: 'Bar',
+                        desc: 'La cuisine espagnole est bien préparée à Le Barn\'s. Offrir un tapas délicieux est la marque de fabrique de ce lieu.',
+                        offre: 'Réduction sur les Yaegerbombs, biéres et punch avec la carte BDE Alive',
+                        logo: './img/partenaires/barns.webp',
+                        url: './partenaires/barns.html'
+                    },
+                ]
+            }
+        },
+        computed: {
+            categories() {
+                const cats = ['Tous', ...new Set(this.partners.map(p => p.category))];
+                return cats;
+            },
+            filteredPartners() {
+                if (this.activeFilter === 'Tous') return this.partners;
+                return this.partners.filter(p => p.category === this.activeFilter);
+            }
+        },
+        watch: {
+            activeFilter() {
+                this.$nextTick(() => {
+                    document.querySelectorAll('.partner-card-full').forEach(el => el.classList.add('visible'));
+                });
+            }
+        },
+        mounted() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            this.$nextTick(() => {
+                document.querySelectorAll('.partner-card-full').forEach(el => el.classList.add('visible'));
+            });
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

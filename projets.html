@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDE Alive - Projets</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="index.html" class="nav-logo-link">
+            <div class="nav-logo">
+                <img src="./img/logo.png">
+                BDE<span> Alive</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="equipe.html">Équipe</a></li>
+            <li><a href="projets.html" class="active">Projets</a></li>
+            <li><a href="partenaires.html">Partenaires</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-orb"></div>
+        <div class="hero-bg-text">BUILD</div>
+
+        <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-left" alt="mascotte">
+        <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-right" alt="mascotte">
+
+        <div class="hero-content">
+            <div class="hero-eyebrow">BDE Alive — Promo 2025/2026</div>
+            <h1>Nos<br><em>Projets</em></h1>
+            <p class="hero-desc">Du code à la livraison. On construit des trucs concrets pour la filière, la promo et au-delà.</p>
+
+            <div class="hero-counts">
+                <div class="count-item">
+                    <div class="count-num">{{ projects.filter(p => p.status === 'En cours').length }}</div>
+                    <div class="count-label">En cours</div>
+                </div>
+                <div class="count-item">
+                    <div class="count-num">{{ projects.filter(p => p.status === 'Prochainement').length }}</div>
+                    <div class="count-label">Prochainement</div>
+                </div>
+                <div class="count-item">
+                    <div class="count-num">{{ projects.filter(p => p.status === 'Terminé').length }}</div>
+                    <div class="count-label">Terminés</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROJETS -->
+    <main class="members-section">
+
+        <!-- ── EN COURS ── -->
+        <template v-if="enCours.length > 0">
+            <div class="bureau-label reveal">
+                <span>En cours</span>
+            </div>
+            <div class="projects-grid-full">
+                <div class="project-card-full reveal" v-for="(proj, i) in enCours" :key="proj.title" :class="'reveal-delay-' + ((i % 5) + 1)">
+                    <div class="pcf-icon" :style="{ background: proj.iconBg }">
+                        <i :class="proj.icon" :style="{ color: proj.typeColor }"></i>
+                    </div>
+                    <div class="pcf-body">
+                        <div class="pcf-meta">
+                            <span class="pcf-type" :style="{ color: proj.typeColor }">{{ proj.type }}</span>
+                            <span class="project-status status-wip">En cours</span>
+                        </div>
+                        <div class="pcf-title">{{ proj.title }}</div>
+                        <p class="pcf-desc">{{ proj.desc }}</p>
+                        <div class="pcf-footer">
+                            <div class="project-stack">
+                                <span class="stack-chip" v-for="t in proj.stack" :key="t">{{ t }}</span>
+                            </div>
+                            <div class="pcf-progress" v-if="proj.progress !== undefined">
+                                <div class="pcf-progress-label">Avancement</div>
+                                <div class="pcf-progress-bar">
+                                    <div class="pcf-progress-fill" :style="{ width: proj.progress + '%', background: proj.typeColor }"></div>
+                                </div>
+                                <div class="pcf-progress-pct" :style="{ color: proj.typeColor }">{{ proj.progress }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- ── PROCHAINEMENT ── -->
+        <template v-if="prochainement.length > 0">
+            <div class="bureau-label reveal">
+                <span>Prochainement</span>
+            </div>
+            <div class="projects-grid-full">
+                <div class="project-card-full reveal pcf-soon" v-for="(proj, i) in prochainement" :key="proj.title" :class="'reveal-delay-' + ((i % 5) + 1)">
+                    <div class="pcf-icon" :style="{ background: proj.iconBg }">
+                        <i :class="proj.icon" :style="{ color: proj.typeColor }"></i>
+                    </div>
+                    <div class="pcf-body">
+                        <div class="pcf-meta">
+                            <span class="pcf-type" :style="{ color: proj.typeColor }">{{ proj.type }}</span>
+                            <span class="project-status status-soon">Prochainement</span>
+                        </div>
+                        <div class="pcf-title">{{ proj.title }}</div>
+                        <p class="pcf-desc">{{ proj.desc }}</p>
+                        <div class="pcf-footer">
+                            <div class="project-stack">
+                                <span class="stack-chip" v-for="t in proj.stack" :key="t">{{ t }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- ── TERMINÉS ── -->
+        <template v-if="termines.length > 0">
+            <div class="bureau-label reveal">
+                <span>Terminés</span>
+            </div>
+            <div class="members-grid">
+                <div class="project-card-sm reveal" v-for="(proj, i) in termines" :key="proj.title" :class="'reveal-delay-' + ((i % 5) + 1)">
+                    <div class="pcs-icon" :style="{ background: proj.iconBg }">
+                        <i :class="proj.icon" :style="{ color: proj.typeColor }"></i>
+                    </div>
+                    <div class="pcs-body">
+                        <div class="pcs-type" :style="{ color: proj.typeColor }">{{ proj.type }}</div>
+                        <div class="pcs-title">{{ proj.title }}</div>
+                        <p class="pcs-desc">{{ proj.desc }}</p>
+                        <div class="project-stack" style="margin-top: 0.6rem;">
+                            <span class="stack-chip" v-for="t in proj.stack" :key="t">{{ t }}</span>
+                        </div>
+                        <span class="project-status status-done" style="margin-top: 0.75rem; display: inline-block;">Terminé</span>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="nav-logo">BDE <span>Alive</span></div>
+                <p>Le BDE qui code autant qu'il fête. Rejoins-nous et fais partie de l'aventure informatique de ta promo.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="equipe.html">Notre équipe</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="index.html#soirees">Soirées</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/bde.info.alive/" target="_blank">Instagram</a></li>
+                        <li><a href="https://discord.gg/yeB7ttZG3j" target="_blank">Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Devenir membre</a></li>
+                        <li><a href="#">Partenaires</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 BDE Alive — Tous droits réservés</span>
+            <div class="footer-socials">
+                <a class="social-btn" href="https://discord.gg/yeB7ttZG3j"><i class="fa-brands fa-discord"></i></a>
+                <a class="social-btn" href="https://www.instagram.com/bde.info.alive/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <span>Made with Vue.js</span>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                projects: [
+                    // ── EN COURS ──
+                    {
+                        title: 'Pull 2025/2026',
+                        icon: 'fa-solid fa-shirt',
+                        iconBg: 'rgba(29,158,117,0.15)',
+                        type: 'Merchandise',
+                        typeColor: '#5DCAA5',
+                        desc: 'Portez haut les couleurs de l\'édition 25/26 : bien plus qu\'un pull, le symbole d\'une promo qui vibre avec le BDE Alive.',
+                        stack: ['35 €'],
+                        status: 'En cours',
+                        progress: 60
+                    },
+                    // ── PROCHAINEMENT ──
+                    {
+                        title: 'Carte Partenaire',
+                        icon: 'fa-solid fa-address-card',
+                        iconBg: 'rgba(0,212,255,0.12)',
+                        type: 'Promotion',
+                        typeColor: '#00D4FF',
+                        desc: 'Profitez de nombreux avantages exclusifs et de réductions immédiates chez tous nos partenaires grâce à votre carte BDE.',
+                        stack: ['20 €'],
+                        status: 'Prochainement',
+                    },
+                    {
+                        title: 'Tournoi e-sport annuel',
+                        icon: 'fa-solid fa-trophy',
+                        iconBg: 'rgba(216,90,48,0.18)',
+                        type: 'Évènement',
+                        typeColor: '#F0997B',
+                        desc: 'Organisation d\'un tournoi e-sport inter-filières avec bracket en ligne, streaming et remise de prix. Ouvert à toute la promo.',
+                        stack: ['GRATUIT'],
+                        status: 'Prochainement'
+                    },
+
+                    // ── TERMINÉS ──
+                    {
+                        title: 'Soirée de lancement BDE',
+                        icon: 'fa-solid fa-champagne-glasses',
+                        iconBg: 'rgba(186,117,23,0.15)',
+                        type: 'Évènement',
+                        typeColor: '#EF9F27',
+                        desc: 'Soirée de présentation du BDE Alive au Diplomate. 80 personnes, bonne ambiance, succès total.',
+                        stack: ['80 participants'],
+                        status: 'Terminé'
+                    },
+                    {
+                        title: 'Match de foot INFO vs MP',
+                        icon: 'fa-solid fa-futbol',
+                        iconBg: 'rgba(29,158,117,0.15)',
+                        type: 'Sport',
+                        typeColor: '#5DCAA5',
+                        desc: 'Match amical entre les promos INFO et MP au stade René Guillou. Résultat serré, ambiance au top.',
+                        stack: ['30 joueurs'],
+                        status: 'Terminé'
+                    },
+                    {
+                        title: 'Tournoi jeux vidéo vs MP',
+                        icon: 'fa-solid fa-gamepad',
+                        iconBg: 'rgba(0,212,255,0.12)',
+                        type: 'E-sport',
+                        typeColor: '#00D4FF',
+                        desc: 'Tournoi de jeux vidéo inter-filières à l\'amphi MMI. 40 participants, classement général et remise de lots.',
+                        stack: ['40 participants'],
+                        status: 'Terminé'
+                    },
+                ]
+            }
+        },
+        computed: {
+            enCours()      { return this.projects.filter(p => p.status === 'En cours'); },
+            prochainement(){ return this.projects.filter(p => p.status === 'Prochainement'); },
+            termines()     { return this.projects.filter(p => p.status === 'Terminé'); },
+        },
+        mounted() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

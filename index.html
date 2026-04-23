@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BDE Informatique — Alive</title>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <div id="app">
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="index.html" class="nav-logo-link">
+                <div class="nav-logo"> 
+                    <img src="./img/logo.png"> 
+                    BDE<span> Alive</span>
+                </div>
+            </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            <li><a href="equipe.html">Équipe</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="partenaires.html">Partenaires</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-orb"></div>
+
+        <!-- Mascot left -->
+        <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-left" alt="mascotte">
+        <!-- Mascot right -->
+        <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-right" alt="mascotte">
+
+        <div class="hero-badge">
+        <div class="badge-dot"></div>
+        BDE Informatique — Promo 2025/2026
+        </div>
+
+        <h1>On code.<br><span class="accent">On fête.</span><br>On innove.</h1>
+        <p class="hero-sub">ALIVE, le bureau des étudiants en informatique. On crée des projets, on organise des soirées inoubliables et on porte haut les couleurs de la filière.</p>
+
+        <div class="hero-btns">
+        <a href="#projets" class="btn-primary">Voir nos projets</a>
+        <a href="#contact" class="btn-outline">Nous rejoindre</a>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- EQUIPE -->
+    <section id="equipe" class="reveal">
+        <div class="section-label"><a href="equipe.html">Notre équipe -></a></div>
+        <h2 class="section-title">Les têtes derrière le code</h2>
+        <p class="section-desc">Une équipe de passionnés au service des étudiants. Développeurs, designers, organisateurs, trésoriers — on a le profil pour tout gérer.</p>
+
+        <div class="team-grid">
+            <img src="./img/equipe.jpg" style="width: 100%; border-radius: 12px; object-fit: cover; aspect-ratio: 16/9;">
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PROJETS -->
+    <div class="projects-section">
+        <div class="projects-inner reveal" id="projets">
+        <div class="section-label"><a href="projets.html">Derniers projets -></a></div>
+        <h2 class="section-title">Ce qu'on a construit</h2>
+        <p class="section-desc">Des projets concrets, des outils utiles. On pousse le code jusqu'au bout.</p>
+
+        <div class="projects-grid">
+            <div class="project-card" v-for="proj in projects" :key="proj.title">
+            <div class="project-header">
+                <div class="project-icon" :style="{ background: proj.iconBg }">
+                    <i :class="proj.icon" :style="{ color: proj.typeColor }"></i>
+                </div>
+                <div>
+                <div class="project-title">{{ proj.title }}</div>
+                <div class="project-type" :style="{ color: proj.typeColor }">{{ proj.type }}</div>
+                </div>
+            </div>
+            <div class="project-body">
+                <p class="project-desc">{{ proj.desc }}</p>
+                <div class="project-footer">
+                <div class="project-stack">
+                    <span class="stack-chip" v-for="t in proj.stack" :key="t">{{ t }}</span>
+                </div>
+                <span class="project-status" :class="proj.status === 'Terminé' ? 'status-done' : 'status-wip'">
+                    {{ proj.status }}
+                </span>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SOIREES -->
+    <section class="reveal">
+        <div class="section-label"><a href="projets.html">Dernières soirées -></a></div>
+        <h2 class="section-title">On sait aussi s'amuser</h2>
+        <p class="section-desc">Le BDE c'est pas que des commits. On organise des événements qui restent dans les mémoires (ou pas, selon la soirée).</p>
+
+        <div class="parties-grid">
+        <div class="party-card" v-for="party in parties" :key="party.name">
+            <div class="party-banner" :style="{ background: party.bg }">
+                <div class="party-icon">
+                    <i :class="party.icon"></i>
+                </div>
+            </div>
+            <div class="party-body">
+            <div class="party-date">{{ party.date }}</div>
+            <div class="party-name">{{ party.name }}</div>
+            <div class="party-desc">{{ party.desc }}</div>
+            <div class="party-info">
+                <span><i class="fa-solid fa-location-dot"></i> {{ party.lieu }}</span>
+                <span><i class="fa-solid fa-users"></i> {{ party.participants }} personnes</span>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PARTENAIRES -->
+    <section id="partenaires" class="reveal">
+        <div class="section-label"><a href="partenaires.html">Nos partenaires -></a></div>
+        <h2 class="section-title">Ils nous font confiance</h2>
+        <p class="section-desc">Avec ta carte BDE Alive, profite de réductions et d'avantages exclusifs chez tous nos partenaires.</p>
+
+        <!-- Grille -->
+        <div class="partners-grid-full">
+            <a
+                v-for="(partner, index) in filteredPartners"
+                :key="partner.name"
+                :href="partner.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="partner-card-full reveal"
+                :class="'reveal-delay-' + ((index % 5) + 1)"
+            >
+                <div class="pcf-glow"></div>
+
+                <!-- Bannière -->
+                <div class="pcf-banner" :style="{ background: partner.bannerBg }">
+                    <div class="pcf-banner-overlay"></div>
+                    <div class="pcf-banner-icon">
+                        <img v-if="partner.logo" :src="partner.logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+                        <i v-else :class="partner.icon" :style="{ color: partner.color }"></i>
+                    </div>
+                    <div class="pcf-category-badge">{{ partner.category }}</div>
+                    <i class="fa-solid fa-arrow-up-right-from-square pcf-arrow"></i>
+                </div>
+
+                <!-- Corps -->
+                <div class="pcf-body">
+                    <div class="pcf-name">{{ partner.name }}</div>
+                    <p class="pcf-desc">{{ partner.desc }}</p>
+                    <div class="pcf-offre">
+                        <i class="fa-solid fa-tag"></i>
+                        {{ partner.offre }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- CTA devenir partenaire -->
+        <div class="partner-become reveal">
+            <i class="fa-solid fa-handshake"></i>
+            <div class="partner-become-text">
+                <strong>Vous souhaitez devenir partenaire ?</strong>
+                <span>Rejoignez notre réseau et profitez d'une visibilité auprès de toute la filière informatique.</span>
+            </div>
+            <a href="#contact" class="btn-outline" style="white-space: nowrap;">Nous contacter</a>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CONTACT -->
+    <div class="contact-section">
+        <div class="contact-inner reveal" id="contact">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">On reste connectés</h2>
+
+        <div class="contact-wrapper">
+            <div class="contact-info">
+            <p class="section-desc">Une question, une idée de projet, ou tu veux rejoindre l'équipe ? On répond vite (enfin, normalement...).</p>
+
+            <div class="contact-channels">
+                <a href="mailto:bdeinfo@inter-asso.fr" class="channel-card">
+                <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                    <div class="channel-label">Email</div>
+                    <div class="channel-value">bdeinfo@inter-asso.fr</div>
+                </div>
+                </a>
+                <a href="https://discord.gg/yeB7ttZG3j" class="channel-card">
+                <div class="channel-icon"><i class="fa-brands fa-discord"></i></div>
+                <div>
+                    <div class="channel-label">Discord</div>
+                    <div class="channel-value">BDE ALIVE</div>
+                </div>
+                </a>
+                <a href="https://www.instagram.com/bde.info.alive/" class="channel-card">
+                <div class="channel-icon"><i class="fa-brands fa-instagram"></i></div>
+                <div>
+                    <div class="channel-label">Instagram</div>
+                    <div class="channel-value">@bde.info.alive</div>
+                </div>
+                </a>
+            </div>
+            </div>
+
+            <div class="contact-form">
+                <div v-if="!formSent">
+                    <div class="form-group">
+                        <label>Ton prénom</label>
+                        <input type="text" v-model="form.name" placeholder="Ex : Lucas" />
+                    </div>
+                    <div class="form-group">
+                        <label>Ton email</label>
+                        <input type="email" v-model="form.email" placeholder="lucas@etudiant.fr" />
+                    </div>
+                    <div class="form-group">
+                        <label>Objet</label>
+                        <select v-model="form.subject">
+                            <option value="">-- Choisir --</option>
+                            <option>Rejoindre le BDE</option>
+                            <option>Proposer un projet</option>
+                            <option>Partenariat</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ton message</label>
+                        <textarea v-model="form.message" placeholder="Dis-nous tout..."></textarea>
+                    </div>
+                    <button class="btn-primary" style="width: 100%;" @click="sendForm" :disabled="formSending">
+                        {{ formSending ? 'Envoi en cours...' : 'Envoyer le message' }}
+                    </button>
+                </div>
+                <div class="form-success" v-else>
+                    Message envoyé !<br>
+                    <span style="font-weight: 400; color: var(--muted); font-size: 0.88rem;">On te répond prochainement.</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="nav-logo">BDE <span>Alive</span></div>
+                <p>Le BDE qui code autant qu'il fête. Rejoins-nous et fais partie de l'aventure informatique de ta promo.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="equipe.html">Notre équipe</a></li>
+                        <li><a href="#projets">Projets</a></li>
+                        <li><a href="#soirees">Soirées</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/bde.info.alive/" target="_blank">Instagram</a></li>
+                        <li><a href="https://discord.gg/yeB7ttZG3j" target="_blank">Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="#contact">Devenir membre</a></li>
+                        <li><a href="#">Partenaires</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 BDE Alive — Tous droits réservés</span>
+            <div class="footer-socials">
+                <a class="social-btn" href="https://discord.gg/yeB7ttZG3j"><i class="fa-brands fa-discord"></i></a>
+                <a class="social-btn" href="https://www.instagram.com/bde.info.alive/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <span>Made with Vue.js </span>
+        </div>
+    </footer>
+
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    formSent: false,
+                    formSending: false,
+                    form: { name: '', email: '', subject: '', message: '' },
+                    activeFilter: 'Tous',
+                    projects: [
+                        { title: 'Pull 2025/2026', icon: 'fa-solid fa-shirt', iconBg: 'rgba(29,158,117,0.15)', type: 'Merchandise', typeColor: '#5DCAA5', desc: 'Portez haut les couleurs de l\'édition 25/26 : bien plus qu\'un pull, le symbole d\'une promo qui vibre avec le BDE Alive.', stack: ['35 €'], status: 'En cours' },
+                        { title: 'Carte Partenaire', icon: 'fa-solid fa-address-card', iconBg: 'rgba(0,212,255,0.12)', type: 'Promotion', typeColor: '#00D4FF', desc: 'Profitez de nombreux avantages exclusifs et de réductions immédiates chez tous nos partenaires grâce à votre carte', stack: ['20 €'], status: 'Prochainement' }
+                    ],
+                    parties: [
+                        { name: 'Match de foot A vs B', icon: 'fa-solid fa-futbol', bg: 'linear-gradient(135deg, #0A1E40, #1B3A6B)', date: 'Jeudi 19 Mars 2026 | 15h30', desc: 'Match de foot entre les classe A et B.', lieu: 'Stade René Guillou', participants: 30 },
+                        { name: 'Soirée nouveaux BDE ', icon: 'fa-solid fa-champagne-glasses', bg: 'linear-gradient(135deg, #1A0A3D, #3B1A7A)', date: 'Jeudi 19 Mars 2026 | 22h00', desc: 'Soirée présentation du nouveau BDE Alive.', lieu: 'le Diplomate', participants: 80 },
+                        { name: 'Tournoi de jeux vidéo vs MP', icon: 'fa-solid fa-gamepad', bg: 'linear-gradient(135deg, #0D2B1A, #1A5233)', date: 'Jeudi 12 Mars 2026 | 14h00', desc: 'Tournoi de jeux vidéo entre les étudiants du BDE Alive et du groupe MP.', lieu: 'Amphi MMI', participants: 40 }
+                    ],
+                    partners: [
+                        // ── RESTAURATION ──
+                        {
+                            name: 'KFC',
+                            icon: 'fa-solid fa-drumstick-bite',
+                            color: '#F40000',
+                            bannerBg: 'linear-gradient(135deg, #3D0000, #7A0A00)',
+                            category: 'Restauration',
+                            desc: 'Le temple du poulet frit croustillant où les seaux à partager et les recettes secrètes du Colonel ravissent les gourmands pressés',
+                            offre: '10% de réduction sur présentation de la carte BDE Alive',
+                            logo: './img/partenaires/kfc.webp',
+                            url: './partenaires/kfc.html'
+                        },
+                        {
+                            name: 'Le Diplomate',
+                            icon: 'fa-solid fa-martini-glass-citrus',
+                            color: '#FF007B',
+                            bannerBg: 'linear-gradient(135deg, #1A0A3D, #3B1A7A)',
+                            category: 'Bar',
+                            desc: 'Un repaire survitaminé où les étudiants se retrouvent pour décompresser autour de tarifs préférentiels sur les boissons.',
+                            offre: 'Réduction sur les Yaegerbombs et biéres avec la carte BDE Alive',
+                            logo: './img/partenaires/diplomate.webp',
+                            url: './partenaires/diplomate.html'
+                        },
+                        {
+                            name: 'Le Truc',
+                            icon: 'fa-solid fa-cocktail',
+                            color: '#FF8C00',
+                            bannerBg: 'linear-gradient(135deg, #2A1500, #5A3000)',
+                            category: 'Bar',
+                            desc: 'Le Truc Café, c\'est le bar à jeux du coin ! Seul ou à plusieurs, en plus des jeux, vous aurez le loisir de découvrir des produits locaux',
+                            offre: 'Réduction sur les cocktails du moments et biéres avec la carte BDE Alive',
+                            logo: './img/partenaires/truc.webp',
+                            url: './partenaires/truc.html'
+                        },
+                    ]
+                }
+            },
+            computed: {
+                categories() {
+                    const cats = ['Tous', ...new Set(this.partners.map(p => p.category))];
+                    return cats;
+                },
+                filteredPartners() {
+                    if (this.activeFilter === 'Tous') return this.partners;
+                    return this.partners.filter(p => p.category === this.activeFilter);
+                }
+            },
+            watch: {
+                activeFilter() {
+                    this.$nextTick(() => {
+                        document.querySelectorAll('.partner-card-full').forEach(el => el.classList.add('visible'));
+                    });
+                }
+            },
+            methods: {
+                async sendForm() {
+                    if (!this.form.name || !this.form.email || !this.form.message) return;
+                    this.formSending = true;
+                    try {
+                        const res = await fetch('https://formspree.io/f/xlgawzrg', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                            body: JSON.stringify(this.form)
+                        });
+                        if (res.ok) this.formSent = true;
+                    } catch (e) {
+                        console.error(e);
+                    } finally {
+                        this.formSending = false;
+                    }
+                }
+            },
+            mounted() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) e.target.classList.add('visible');
+                    });
+                }, { threshold: 0.12 });
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+                this.$nextTick(() => {
+                    document.querySelectorAll('.partner-card-full').forEach(el => el.classList.add('visible'));
+                });
+            }
+        }).mount('#app');
+    </script>
+    </body>
+</html>
