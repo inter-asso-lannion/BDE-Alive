@@ -38,7 +38,7 @@
             <img src="./img/logo_blanc.png" class="hero-mascot hero-mascot-right" alt="mascotte">
 
             <div class="hero-content">
-                <div class="hero-eyebrow">BDE Alive — Promo 2025/2026</div>
+                <div class="hero-eyebrow">BDE Alive — Promo 2026/2027</div>
                 <h1>Notre<br><em>Équipe</em></h1>
                 <p class="hero-desc">Ceux qui font tourner la machine. Du code aux soirées, chaque membre apporte sa patte à l'aventure du BDE Alive.</p>
 
@@ -260,39 +260,39 @@
         setup() {
             const members = ref([
                 // --- BUREAU ---
-                { id: 1,  firstName: 'Paolo',    lastName: 'PERCHE',            promo: 'BUT2', promoText: '2 éme année', role: 'Président',          roleClass: 'role-president',   photo: './img/membres/Paolo.jpg',       isBureau: true,  group: 'bureau' },
-                { id: 2,  firstName: 'Romain',   lastName: 'LEFRANC',           promo: 'BUT2', promoText: '2 éme année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Romain.jpg',      isBureau: true,  group: 'bureau' },
-                { id: 3,  firstName: 'Gabin',    lastName: 'CHEVALIER',         promo: 'BUT2', promoText: '2 éme année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Gabin.jpg',       isBureau: true,  group: 'bureau' },
-                { id: 4,  firstName: 'Nathan',   lastName: 'LE HEBEL',          promo: 'BUT2', promoText: '2 éme année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Nathan.jpg',      isBureau: true,  group: 'bureau' },
-                { id: 7,  firstName: 'Gaëtan',   lastName: 'LOLLIERIC',         promo: 'BUT2', promoText: '2 éme année', role: 'Secrétaire',         roleClass: 'role-secretaire',  photo: './img/membres/Gaëtan.jpg',      isBureau: true,  group: 'bureau' },
+                { id: 1,  firstName: 'Paolo',    lastName: 'PERCHE',            promo: 'BUT3', promoText: '3ème année', role: 'Président',          roleClass: 'role-president',   photo: './img/membres/Paolo.jpg',       isBureau: true,  group: 'bureau' },
+                { id: 2,  firstName: 'Romain',   lastName: 'LEFRANC',           promo: 'BUT3', promoText: '3ème année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Romain.jpg',      isBureau: true,  group: 'bureau' },
+                { id: 3,  firstName: 'Gabin',    lastName: 'CHEVALIER',         promo: 'BUT3', promoText: '3ème année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Gabin.jpg',       isBureau: true,  group: 'bureau' },
+                { id: 4,  firstName: 'Nathan',   lastName: 'LE HEBEL',          promo: 'BUT3', promoText: '3ème année', role: 'Vice-Président',     roleClass: 'role-vice',        photo: './img/membres/Nathan.jpg',      isBureau: true,  group: 'bureau' },
+                { id: 7,  firstName: 'Gaëtan',   lastName: 'LOLLIERIC',         promo: 'BUT3', promoText: '3ème année', role: 'Secrétaire',         roleClass: 'role-secretaire',  photo: './img/membres/Gaëtan.jpg',      isBureau: true,  group: 'bureau' },
 
                 // --- TRÉSORERIE ---
-                { id: 6,  firstName: 'Johan',    lastName: 'KERAUDREN',         promo: 'BUT2', promoText: '2 éme année', role: 'Resp. Trésorerie',   roleClass: 'role-treso',       photo: './img/membres/Johan.jpg',       isBureau: true,  group: 'treso',  isResp: true  },
-                { id: 15, firstName: 'Titouan',  lastName: 'LOUIS--RENAULT',    promo: 'BUT1', promoText: '1 er année',  role: 'Trésorier',          roleClass: 'role-treso',       photo: './img/membres/Titouan_L.jpg',   isBureau: false, group: 'treso',  isResp: false },
-                { id: 21, firstName: 'Thuân',    lastName: 'DANG',              promo: 'BUT1', promoText: '1 er année', role: 'Trésorier',           roleClass: 'role-treso',       photo: './img/membres/Thuan.jpg',       isBureau: false, group: 'treso',  isResp: false },
+                { id: 6,  firstName: 'Johan',    lastName: 'KERAUDREN',         promo: 'BUT3', promoText: '3ème année', role: 'Resp. Trésorerie',   roleClass: 'role-treso',       photo: './img/membres/Johan.jpg',       isBureau: true,  group: 'treso',  isResp: true  },
+                { id: 15, firstName: 'Titouan',  lastName: 'LOUIS--RENAULT',    promo: 'BUT2', promoText: '2ème année',  role: 'Trésorier',          roleClass: 'role-treso',       photo: './img/membres/Titouan_L.jpg',   isBureau: false, group: 'treso',  isResp: false },
+                { id: 21, firstName: 'Thuân',    lastName: 'DANG',              promo: 'BUT2', promoText: '2ème année', role: 'Trésorier',           roleClass: 'role-treso',       photo: './img/membres/Thuan.jpg',       isBureau: false, group: 'treso',  isResp: false },
 
                 // --- COMMUNICATION ---
-                { id: 5,  firstName: 'Thélio',   lastName: 'BLEUZEN',           promo: 'BUT2', promoText: '2ème année', role: 'Resp. Communication', roleClass: 'role-comm',        photo: './img/membres/Thélio.jpg',      isBureau: true,  group: 'comm', isResp: true  },
-                { id: 12, firstName: 'Ewen',     lastName: 'SEVEN',             promo: 'BUT2', promoText: '2ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Ewen.jpg',        isBureau: false, group: 'comm', isResp: false },
-                { id: 22, firstName: 'Louennig', lastName: 'LE GALL',           promo: 'BUT2', promoText: '2ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Louennig.jpg',    isBureau: false, group: 'comm', isResp: false },
-                { id: 19, firstName: 'Mathis',   lastName: 'LOQUAIS',           promo: 'BUT2', promoText: '2ème année', role: 'Communication',       roleClass: 'role-comm',        photo: '',                              isBureau: false, group: 'comm', isResp: false },
-                { id: 24, firstName: 'Yanis',    lastName: 'GUERIF',            promo: 'BUT1', promoText: '1er année',  role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Yanis.jpg',       isBureau: false, group: 'comm', isResp: false },
+                { id: 5,  firstName: 'Thélio',   lastName: 'BLEUZEN',           promo: 'BUT3', promoText: '3ème année', role: 'Resp. Communication', roleClass: 'role-comm',        photo: './img/membres/Thélio.jpg',      isBureau: true,  group: 'comm', isResp: true  },
+                { id: 12, firstName: 'Ewen',     lastName: 'SEVEN',             promo: 'BUT3', promoText: '3ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Ewen.jpg',        isBureau: false, group: 'comm', isResp: false },
+                { id: 22, firstName: 'Louennig', lastName: 'LE GALL',           promo: 'BUT3', promoText: '3ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Louennig.jpg',    isBureau: false, group: 'comm', isResp: false },
+                { id: 19, firstName: 'Mathis',   lastName: 'LOQUAIS',           promo: 'BUT3', promoText: '3ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Mathis.jpg',      isBureau: false, group: 'comm', isResp: false },
+                { id: 24, firstName: 'Yanis',    lastName: 'GUERIF',            promo: 'BUT2', promoText: '2ème année',  role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Yanis.jpg',       isBureau: false, group: 'comm', isResp: false },
 
                 // --- ÉVÈNEMENTIEL ---
-                { id: 8,  firstName: 'Titouan',  lastName: 'QUILLEVERE',        promo: 'BUT2', promoText: '2 éme année', role: 'Resp. Events',        roleClass: 'role-events',     photo: './img/membres/Titouan_Q.jpg',   isBureau: true,  group: 'events', isResp: true  },
-                { id: 9,  firstName: 'Yiwen',    lastName: 'KADRI',             promo: 'BUT2', promoText: '2 éme année', role: 'Resp. Events',        roleClass: 'role-events',     photo: './img/membres/Yiwen.jpg',       isBureau: true,  group: 'events', isResp: true  },
+                { id: 8,  firstName: 'Titouan',  lastName: 'QUILLEVERE',        promo: 'BUT3', promoText: '3ème année', role: 'Resp. Events',        roleClass: 'role-events',     photo: './img/membres/Titouan_Q.jpg',   isBureau: true,  group: 'events', isResp: true  },
+                { id: 9,  firstName: 'Yiwen',    lastName: 'KADRI',             promo: 'BUT3', promoText: '3ème année', role: 'Resp. Events',        roleClass: 'role-events',     photo: './img/membres/Yiwen.jpg',       isBureau: true,  group: 'events', isResp: true  },
 
                 // --- MEMBRES ---
-                { id: 10, firstName: 'Clément',  lastName: 'BIGOUIN',           promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: './img/membres/Clément.jpg',     isBureau: false, group: 'membres' },
-                { id: 11, firstName: 'Lucien',   lastName: 'LE GOC',            promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 13, firstName: 'Baptiste', lastName: 'GAULTIER',          promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 14, firstName: 'Liam',     lastName: 'CHARPENTIER',       promo: 'BUT1', promoText: '1 er année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 16, firstName: 'Mael',     lastName: 'FOURRE',            promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 17, firstName: 'Léo',      lastName: 'TESSIER',           promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 18, firstName: 'Clément',  lastName: 'PHILIPPO',          promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 20, firstName: 'Guéwen',   lastName: 'MARÉCHAL',          promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 23, firstName: 'Edgar',    lastName: 'RODRIGUES MOREIRA', promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
-                { id: 25, firstName: 'Edouard',  lastName: 'LE LAY',            promo: 'BUT2', promoText: '2 éme année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 10, firstName: 'Clément',  lastName: 'BIGOUIN',           promo: 'BUT2', promoText: '2ème année',  role: 'Membre',              roleClass: 'role',            photo: './img/membres/Clément.jpg',     isBureau: false, group: 'membres' },
+                { id: 11, firstName: 'Lucien',   lastName: 'LE GOC',            promo: 'BUT2', promoText: '2ème année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 13, firstName: 'Baptiste', lastName: 'GAULTIER',          promo: 'BUT2', promoText: '2ème année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 14, firstName: 'Liam',     lastName: 'CHARPENTIER',       promo: 'BUT2', promoText: '2ème année',  role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 16, firstName: 'Mael',     lastName: 'FOURRE',            promo: 'BUT3', promoText: '3ème année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 17, firstName: 'Léo',      lastName: 'TESSIER',           promo: 'BUT3', promoText: '3ème année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 18, firstName: 'Clément',  lastName: 'PHILIPPO',          promo: 'BUT3', promoText: '3ème année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 20, firstName: 'Guéwen',   lastName: 'MARÉCHAL',          promo: 'BUT3', promoText: '3ème année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 23, firstName: 'Edgar',    lastName: 'RODRIGUES MOREIRA', promo: 'BUT3', promoText: '3ème année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
+                { id: 25, firstName: 'Edouard',  lastName: 'LE LAY',            promo: 'BUT3', promoText: '3ème année', role: 'Membre',              roleClass: 'role',            photo: '',                              isBureau: false, group: 'membres' },
             ]);
 
             const getInitials = (first, last) => (first[0] + last[0]).toUpperCase();
