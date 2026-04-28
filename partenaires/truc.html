@@ -28,7 +28,23 @@
                     <li><a href="../partenaires.html" class="active">Partenaires</a></li>
                     <li><a href="../index.html#contact">Contact</a></li>
                 </ul>
+                    <!-- BURGER BUTTON (mobile) -->
+                <button class="burger-btn" id="burgerBtn" aria-label="Menu" onclick="toggleBurger()">
+                    <div class="burger-bar"></div>
+                    <div class="burger-bar"></div>
+                    <div class="burger-bar"></div>
+                </button>
             </nav>
+            
+            <!-- MOBILE MENU -->
+            <div class="mobile-menu" id="mobileMenu">
+                <a class="menu-link" href="../index.html"><div class="menu-dot"></div>Accueil</a>
+                <a class="menu-link" href="../equipe.html"><div class="menu-dot"></div>Équipe</a>
+                <a class="menu-link" href="../projets.html"><div class="menu-dot"></div>Projets</a>
+                <a class="menu-link active" href="../partenaires.html"><div class="menu-dot"></div>Partenaires</a>
+                <div class="menu-divider"></div>
+                <a class="menu-cta" href="../index.html#contact">Contact</a>
+            </div>
 
             <!-- HERO -->
             <header class="partner-hero">
@@ -48,7 +64,7 @@
 
                     <!-- Logo -->
                     <div class="partner-logo-wrap">
-                        <img src="../img/partenaires/Truc.webp" alt="Le Truc" onerror="this.parentElement.innerHTML='<div class=\'partner-logo-wrap-fallback\'><i class=\'fa-solid fa-drumstick-bite\'></i></div>'">
+                        <img src="../img/partenaires/truc.webp" alt="Le Truc" onerror="this.parentElement.innerHTML='<div class=\'partner-logo-wrap-fallback\'><i class=\'fa-solid fa-drumstick-bite\'></i></div>'">
                     </div>
 
                     <!-- Badge -->
@@ -181,25 +197,25 @@
                         <div class="footer-col">
                             <h4>Navigation</h4>
                             <ul>
-                                <li><a href="equipe.html">Notre équipe</a></li>
-                                <li><a href="projets.html">Projets</a></li>
-                                <li><a href="partenaires.html">Partenaires</a></li>
-                                <li><a href="index.html#contact">Contact</a></li>
+                                <li><a href="../equipe.html">Notre équipe</a></li>
+                                <li><a href="../projets.html">Projets</a></li>
+                                <li><a href="../projets.html">Soirées</a></li>
+                                
                             </ul>
                         </div>
                         <div class="footer-col">
                             <h4>Ressources</h4>
                             <ul>
-                                <li><a href="https://www.instagram.com/bde.info.alive/" target="_blank">Instagram</a></li>
-                                <li><a href="https://discord.gg/yeB7ttZG3j" target="_blank">Discord</a></li>
+                                <li><a href="https://www.instagram.com/bde.info.alive/">Instagram</a></li>
+                                <li><a href="https://discord.gg/yeB7ttZG3j">Discord</a></li>
                             </ul>
                         </div>
                         <div class="footer-col">
                             <h4>Info</h4>
                             <ul>
-                                <li><a href="index.html#contact">Devenir membre</a></li>
-                                <li><a href="partenaires.html">Partenaires</a></li>
-                                <li><a href="index.html#contact">Contact</a></li>
+                                <li><a href="../index.html#contact">Devenir membre</a></li>
+                                <li><a href="../index.html#contact">Partenaires</a></li>
+                                <li><a href="../index.html#contact">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -207,10 +223,10 @@
                 <div class="footer-bottom">
                     <span>© 2025 BDE Alive — Tous droits réservés</span>
                     <div class="footer-socials">
+                        <a class="social-btn" href="../index.html#contact"><i class="fa-solid fa-envelope"></i></a>
                         <a class="social-btn" href="https://discord.gg/yeB7ttZG3j"><i class="fa-brands fa-discord"></i></a>
                         <a class="social-btn" href="https://www.instagram.com/bde.info.alive/"><i class="fa-brands fa-instagram"></i></a>
                     </div>
-                    <span>Made with Vue.js</span>
                 </div>
             </footer>
         </div>
@@ -226,6 +242,19 @@
                     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
                 }
             }).mount('#app');
+        </script>
+        <script>
+            function toggleBurger() {
+                document.getElementById('burgerBtn').classList.toggle('open');
+                document.getElementById('mobileMenu').classList.toggle('open');
+            }
+            // Ferme le menu si on clique ailleurs
+            document.addEventListener('click', e => {
+                if (!e.target.closest('nav') && !e.target.closest('.mobile-menu')) {
+                    document.getElementById('burgerBtn').classList.remove('open');
+                    document.getElementById('mobileMenu').classList.remove('open');
+                }
+            });
         </script>
     </body>
 </html>
