@@ -108,7 +108,7 @@ nav {
     font-weight: 800;
     color: var(--accent);
     letter-spacing: -0.5px;
-    margin-bottom: 2svh;
+    margin-bottom: 1svh;
     text-decoration: none;
 }
 
@@ -818,7 +818,7 @@ section {
 
 .members-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1rem;
 }
 
@@ -1552,7 +1552,7 @@ footer {
 }
 
 .pcf-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.2rem;
     font-weight: 800;
     color: #fff;
@@ -1614,8 +1614,8 @@ footer {
     background: var(--bg2);
     border: 1px solid rgba(55, 138, 221, 0.1);
     border-radius: 16px;
-    padding: 1.25rem;
-    width: 100%;
+    padding: 2svh;
+    width: 23svh;
     transition: border-color 0.25s, transform 0.25s;
 }
 
@@ -1644,7 +1644,7 @@ footer {
 }
 
 .pcs-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1rem;
     font-weight: 800;
     color: #fff;
@@ -2304,6 +2304,7 @@ footer {
     opacity: 0;
     transition: opacity 0.3s, transform 0.3s;
     pointer-events: none;
+    margin-top: 2svh ;
 }
 .mobile-menu.open {
     opacity: 1;

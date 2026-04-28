@@ -60,16 +60,18 @@
 
                 <div class="hero-counts">
                     <div class="count-item">
-                        <div class="count-num">{{ members.filter(m => m.isBureau).length }}</div>
+                        <div class="count-num">{{ countBureau }}</div>
                         <div class="count-label">Bureau</div>
                     </div>
+
                     <div class="count-item">
-                        <div class="count-num">{{ members.filter(m => !m.isBureau).length }}</div>
+                        <div class="count-num">{{ membersWithRole.length }}</div>
                         <div class="count-label">Membres actifs</div>
                     </div>
+
                     <div class="count-item">
-                        <div class="count-num">2</div>
-                        <div class="count-label">Promos</div>
+                        <div class="count-num">{{ membersWithoutRole.length }}</div>
+                        <div class="count-label">Membres</div>
                     </div>
                 </div>
             </div>
@@ -291,7 +293,7 @@
                 // --- COMMUNICATION ---
                 { id: 5,  firstName: 'Thélio',   lastName: 'BLEUZEN',           promo: 'BUT3', promoText: '3ème année', role: 'Resp. Communication', roleClass: 'role-comm',        photo: './img/membres/Thélio.jpg',      isBureau: true,  group: 'comm', isResp: true  },
                 { id: 12, firstName: 'Ewen',     lastName: 'SEVEN',             promo: 'BUT3', promoText: '3ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Ewen.jpg',        isBureau: false, group: 'comm', isResp: false },
-                { id: 22, firstName: 'Louennig', lastName: 'LE GALL',           promo: 'BUT3', promoText: '3ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Louennig.jpg',    isBureau: false, group: 'comm', isResp: false },
+                { id: 22, firstName: 'Louennig', lastName: 'CORREC',            promo: 'BUT3', promoText: '3ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Louennig.jpg',    isBureau: false, group: 'comm', isResp: false },
                 { id: 19, firstName: 'Mathis',   lastName: 'LOQUAIS',           promo: 'BUT3', promoText: '3ème année', role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Mathis.jpg',      isBureau: false, group: 'comm', isResp: false },
                 { id: 24, firstName: 'Yanis',    lastName: 'GUERIF',            promo: 'BUT2', promoText: '2ème année',  role: 'Communication',       roleClass: 'role-comm',        photo: './img/membres/Yanis.jpg',       isBureau: false, group: 'comm', isResp: false },
 
@@ -336,6 +338,20 @@
 
             onMounted(() => initObserver());
 
+            const countBureau = computed(() => 
+                members.value.filter(m => m.isBureau || m.role.includes('Resp.')).length
+            );
+
+            // Membres qui ont un rôle (différent de "Membre") et qui ne sont PAS dans le bureau
+            const membersWithRole = computed(() => 
+                members.value.filter(m => m.role !== 'Membre' && !m.isBureau)
+            );
+
+            // Membres qui ont uniquement le rôle "Membre"
+            const membersWithoutRole = computed(() => 
+                members.value.filter(m => m.role === 'Membre')
+            );
+
             return {
                 members,
                 groupBureau,
@@ -343,8 +359,9 @@
                 groupComm,
                 groupEvents,
                 groupMembres,
-                filteredBureau,
-                filteredActifs,
+                countBureau,
+                membersWithRole,
+                membersWithoutRole,
                 getInitials
             };
         }
