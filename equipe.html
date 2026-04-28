@@ -79,153 +79,85 @@
 
         <main class="members-section">
 
-            <!-- ── BUREAU ── -->
-            <template v-if="groupBureau.length > 0">
-                <div class="bureau-label reveal">
-                    <span>Bureau exécutif</span>
+    <template v-if="groupBureau.length > 0">
+        <div class="bureau-label reveal"><span>Bureau exécutif</span></div>
+        <div class="bureau-grid">
+            <div v-for="(member, index) in groupBureau" :key="member.id" class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-glow"></div>
+                <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
                 </div>
-                <div class="bureau-grid">
-                    <div 
-                        v-for="(member, index) in groupBureau" 
-                        :key="member.id"
-                        class="member-card reveal" 
-                        :class="'reveal-delay-' + ((index % 5) + 1)"
-                    >
-                        <div class="card-glow"></div>
-                        <div class="card-photo" 
-                             :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">
-                                {{ getInitials(member.firstName, member.lastName) }}
-                            </div>
-                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-name">
-                                <span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}
-                            </div>
-                            <div class="card-promo">{{ member.promoText }}</div>
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo">{{ member.promoText }}</div>
                 </div>
-            </template>
+            </div>
+        </template>
 
-            <!-- ── TRÉSORERIE ── -->
-            <template v-if="groupTreso.length > 0">
-                <div class="bureau-label reveal">
-                    <span>Trésorerie</span>
+    <template v-if="groupTreso.length > 0">
+        <div class="bureau-label reveal"><span>Trésorerie</span></div>
+        <div class="members-grid"> <div v-for="(member, index) in groupTreso" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass" style="font-size: 0.7rem; padding: 2px 8px;">{{ member.role }}</div>
                 </div>
-                <div class="bureau-grid" v-if="groupTreso.filter(m => m.isResp).length > 0">
-                    <div v-for="(member, index) in groupTreso.filter(m => m.isResp)" :key="member.id"
-                        class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
-                        <div class="card-glow"></div>
-                        <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
-                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
-                            <div class="card-promo">{{ member.promoText }}</div>
-                        </div>
-                    </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
                 </div>
-                <div class="members-grid" v-if="groupTreso.filter(m => !m.isResp).length > 0">
-                    <div v-for="(member, index) in groupTreso.filter(m => !m.isResp)" :key="member.id"
-                        class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
-                        <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-                            <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
-                        </div>
-                        <div class="card-body-sm">
-                            <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
-                            <div class="card-promo-sm">{{ member.promoText }}</div>
-                            <div class="card-role-sm" :class="member.roleClass">{{ member.role }}</div>
-                        </div>
-                    </div>
-                </div>
-            </template>
+            </div>
+        </div>
+    </template>
 
-            <!-- ── COMMUNICATION ── -->
-            <template v-if="groupComm.length > 0">
-                <div class="bureau-label reveal">
-                    <span>Communication</span>
+    <template v-if="groupComm.length > 0">
+        <div class="bureau-label reveal"><span>Communication</span></div>
+        <div class="members-grid">
+            <div v-for="(member, index) in groupComm" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass" style="font-size: 0.7rem; padding: 2px 8px;">{{ member.role }}</div>
                 </div>
-                <div class="bureau-grid" v-if="groupComm.filter(m => m.isResp).length > 0">
-                    <div v-for="(member, index) in groupComm.filter(m => m.isResp)" :key="member.id"
-                        class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
-                        <div class="card-glow"></div>
-                        <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
-                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
-                            <div class="card-promo">{{ member.promoText }}</div>
-                        </div>
-                    </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
                 </div>
-                <div class="members-grid" v-if="groupComm.filter(m => !m.isResp).length > 0">
-                    <div v-for="(member, index) in groupComm.filter(m => !m.isResp)" :key="member.id"
-                        class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
-                        <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-                            <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
-                        </div>
-                        <div class="card-body-sm">
-                            <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
-                            <div class="card-promo-sm">{{ member.promoText }}</div>
-                            <div class="card-role-sm" :class="member.roleClass">{{ member.role }}</div>
-                        </div>
-                    </div>
-                </div>
-            </template>
+            </div>
+        </div>
+    </template>
 
-            <!-- ── ÉVÈNEMENTIEL ── -->
-            <template v-if="groupEvents.length > 0">
-                <div class="bureau-label reveal">
-                    <span>Évènementiel</span>
+    <template v-if="groupEvents.length > 0">
+        <div class="bureau-label reveal"><span>Évènementiel</span></div>
+        <div class="members-grid">
+            <div v-for="(member, index) in groupEvents" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass" style="font-size: 0.7rem; padding: 2px 8px;">{{ member.role }}</div>
                 </div>
-                <div class="bureau-grid">
-                    <div v-for="(member, index) in groupEvents" :key="member.id"
-                        class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
-                        <div class="card-glow"></div>
-                        <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-                            <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
-                            <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
-                            <div class="card-promo">{{ member.promoText }}</div>
-                        </div>
-                    </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
                 </div>
-            </template>
+            </div>
+        </div>
+    </template>
 
-            <!-- ── MEMBRES ── -->
-            <template v-if="groupMembres.length > 0">
-                <div class="bureau-label reveal">
-                    <span>Membres actifs</span>
+    <template v-if="groupMembres.length > 0">
+        <div class="bureau-label reveal"><span>Membres actifs</span></div>
+        <div class="members-grid">
+            <div v-for="(member, index) in groupMembres" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
                 </div>
-                <div class="members-grid">
-                    <div 
-                        v-for="(member, index) in groupMembres" 
-                        :key="member.id"
-                        class="member-card-sm reveal"
-                        :class="'reveal-delay-' + ((index % 5) + 1)"
-                    >
-                        <div class="card-photo-sm" 
-                             :style="member.photo ? { backgroundImage: 'url(' + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-                            <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">
-                                {{ getInitials(member.firstName, member.lastName) }}
-                            </div>
-                        </div>
-                        <div class="card-body-sm">
-                            <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
-                            <div class="card-promo-sm">{{ member.promoText }}</div>
-                            <div class="card-role-sm" :class="member.roleClass">{{ member.role }}</div>
-                        </div>
-                    </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
                 </div>
-            </template>
+            </div>
+        </div>
+    </template>
 
-        </main>
+</main>
 
         <!-- FOOTER -->
         <footer>
