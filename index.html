@@ -27,6 +27,7 @@
             <li><a href="equipe.html">Équipe</a></li>
             <li><a href="projets.html">Projets</a></li>
             <li><a href="partenaires.html">Partenaires</a></li>
+            <li><a href="boutique.html">Boutique</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <!-- BURGER BUTTON (mobile) -->
@@ -43,6 +44,7 @@
         <a class="menu-link" href="equipe.html"><div class="menu-dot"></div>Équipe</a>
         <a class="menu-link" href="projets.html"><div class="menu-dot"></div>Projets</a>
         <a class="menu-link" href="partenaires.html"><div class="menu-dot"></div>Partenaires</a>
+        <a class="menu-link" href="./boutique.html"><div class="menu-dot"></div>Boutique</a>
         <div class="menu-divider"></div>
         <a class="menu-cta" href="#contact">Contact</a>
     </div>
@@ -94,28 +96,35 @@
         <p class="section-desc">Des projets concrets, des outils utiles. On pousse le code jusqu'au bout.</p>
 
         <div class="projects-grid">
-            <div class="project-card" v-for="proj in projects" :key="proj.title">
-            <div class="project-header">
-                <div class="project-icon" :style="{ background: proj.iconBg }">
-                    <i :class="proj.icon" :style="{ color: proj.typeColor }"></i>
+            <a
+                class="project-card"
+                v-for="proj in projects"
+                :key="proj.title"
+                :href="proj.URL || '#'"
+                :target="proj.URL ? '_blank' : null"
+                style="text-decoration: none; color: inherit; display: block;"
+            >
+                <div class="project-header">
+                    <div class="project-icon" :style="{ background: proj.iconBg }">
+                        <i :class="proj.icon" :style="{ color: proj.typeColor }"></i>
+                    </div>
+                    <div>
+                        <div class="project-title">{{ proj.title }}</div>
+                        <div class="project-type" :style="{ color: proj.typeColor }">{{ proj.type }}</div>
+                    </div>
                 </div>
-                <div>
-                <div class="project-title">{{ proj.title }}</div>
-                <div class="project-type" :style="{ color: proj.typeColor }">{{ proj.type }}</div>
+                <div class="project-body">
+                    <p class="project-desc">{{ proj.desc }}</p>
+                    <div class="project-footer">
+                        <div class="project-stack">
+                            <span class="stack-chip" v-for="t in proj.stack" :key="t">{{ t }}</span>
+                        </div>
+                        <span class="project-status" :class="proj.status === 'Terminé' ? 'status-done' : 'status-wip'">
+                            {{ proj.status }}
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="project-body">
-                <p class="project-desc">{{ proj.desc }}</p>
-                <div class="project-footer">
-                <div class="project-stack">
-                    <span class="stack-chip" v-for="t in proj.stack" :key="t">{{ t }}</span>
-                </div>
-                <span class="project-status" :class="proj.status === 'Terminé' ? 'status-done' : 'status-wip'">
-                    {{ proj.status }}
-                </span>
-                </div>
-            </div>
-            </div>
+            </a>
         </div>
         </div>
     </div>
@@ -297,6 +306,7 @@
                 <div class="footer-col">
                     <h4>Ressources</h4>
                     <ul>
+                        <li><a href="./boutique.html">Boutique</a></li>
                         <li><a href="https://www.instagram.com/bde.info.alive/">Instagram</a></li>
                         <li><a href="https://discord.gg/yeB7ttZG3j">Discord</a></li>
                     </ul>
@@ -334,8 +344,8 @@
                     form: { name: '', email: '', subject: '', message: '' },
                     activeFilter: 'Tous',
                     projects: [
-                        { title: 'Pull 2025/2026', icon: 'fa-solid fa-shirt', iconBg: 'rgba(29,158,117,0.15)', type: 'Merchandise', typeColor: '#5DCAA5', desc: 'Portez haut les couleurs de l\'édition 25/26 : bien plus qu\'un pull, le symbole d\'une promo qui vibre avec le BDE Alive.', stack: ['35 €'], status: 'En cours' },
-                        { title: 'Carte Partenaire', icon: 'fa-solid fa-address-card', iconBg: 'rgba(0,212,255,0.12)', type: 'Promotion', typeColor: '#00D4FF', desc: 'Profitez de nombreux avantages exclusifs et de réductions immédiates chez tous nos partenaires grâce à votre carte', stack: ['20 €'], status: 'Prochainement' }
+                        { title: 'Pochette BDE Alive', icon: 'fa-solid fa-shirt', iconBg: 'rgba(29,158,117,0.15)', type: 'Merchandise', typeColor: '#5DCAA5', desc: 'La pochette officielle du BDE Alive. Gravure Laser. Matière 100% polyester.', stack: ['15 €'], status: 'En cours', URL: './shop/pochette.html' },
+                        { title: 'Carte Partenaire', icon: 'fa-solid fa-address-card', iconBg: 'rgba(0,212,255,0.12)', type: 'Promotion', typeColor: '#00D4FF', desc: 'Profitez de nombreux avantages exclusifs et de réductions immédiates chez tous nos partenaires grâce à votre carte', stack: ['20 €'], status: 'Prochainement', URL: './partenaires.html' },
                     ],
                     parties: [
                         { name: 'Match de foot A vs B', icon: 'fa-solid fa-futbol', bg: 'linear-gradient(135deg, #0A1E40, #1B3A6B)', date: 'Jeudi 19 Mars 2026 | 15h30', desc: 'Match de foot entre les classe A et B.', lieu: 'Stade René Guillou', participants: 30 },

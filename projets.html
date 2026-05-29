@@ -27,6 +27,7 @@
             <li><a href="equipe.html">Équipe</a></li>
             <li><a href="projets.html" class="active">Projets</a></li>
             <li><a href="partenaires.html">Partenaires</a></li>
+            <li><a href="boutique.html">Boutique</a></li>
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <!-- BURGER BUTTON (mobile) -->
@@ -43,6 +44,7 @@
         <a class="menu-link" href="equipe.html"><div class="menu-dot"></div>Équipe</a>
         <a class="menu-link active" href="projets.html"><div class="menu-dot"></div>Projets</a>
         <a class="menu-link" href="partenaires.html"><div class="menu-dot"></div>Partenaires</a>
+        <a class="menu-link" href="./boutique.html"><div class="menu-dot"></div>Boutique</a>
         <div class="menu-divider"></div>
         <a class="menu-cta" href="#contact">Contact</a>
     </div>
@@ -87,7 +89,7 @@
                 <span>En cours</span>
             </div>
             <div class="projects-grid-full">
-                <div class="project-card-full reveal" v-for="(proj, i) in enCours" :key="proj.title" :class="'reveal-delay-' + ((i % 5) + 1)">
+                <a class="project-card-full reveal" v-for="(proj, i) in enCours" :key="proj.title" :class="'reveal-delay-' + ((i % 5) + 1)" :href="proj.URL" target="_blank">
                     <div class="pcf-icon" :style="{ background: proj.iconBg }">
                         <i :class="proj.icon" :style="{ color: proj.typeColor }"></i>
                     </div>
@@ -111,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </template>
 
@@ -187,6 +189,7 @@
                 <div class="footer-col">
                     <h4>Ressources</h4>
                     <ul>
+                        <li><a href="./boutique.html">Boutique</a></li>
                         <li><a href="https://www.instagram.com/bde.info.alive/">Instagram</a></li>
                         <li><a href="https://discord.gg/yeB7ttZG3j">Discord</a></li>
                     </ul>
@@ -222,16 +225,17 @@
                 projects: [
                     // ── EN COURS ──
                     {
-                        title: 'Pull 2025/2026',
+                        title: 'Pochette',
                         icon: 'fa-solid fa-shirt',
                         iconBg: 'rgba(29,158,117,0.15)',
                         type: 'Merchandise',
                         typeColor: '#5DCAA5',
-                        desc: 'Portez haut les couleurs de l\'édition 25/26 : bien plus qu\'un pull, le symbole d\'une promo qui vibre avec le BDE Alive.',
-                        stack: ['35 €'],
+                        desc: 'La pochette officielle du BDE Alive. Gravure Laser. Matière 100% polyester.',
+                        stack: ['15 €'],
                         status: 'En cours',
-                        progress: 60
+                        URL: './shop/pochette.html'
                     },
+
                     // ── PROCHAINEMENT ──
                     {
                         title: 'Carte Partenaire',
@@ -284,6 +288,16 @@
                         desc: 'Tournoi de jeux vidéo inter-filières à l\'amphi MMI. 40 participants, classement général et remise de lots.',
                         stack: ['40 participants'],
                         status: 'Terminé'
+                    },
+                    {
+                        title: 'Pull 2025/2026',
+                        icon: 'fa-solid fa-shirt',
+                        iconBg: 'rgba(29,158,117,0.15)',
+                        type: 'Merchandise',
+                        typeColor: '#5DCAA5',
+                        desc: 'Portez haut les couleurs de l\'édition 25/26 : bien plus qu\'un pull, le symbole d\'une promo qui vibre avec le BDE Alive.',
+                        stack: ['35 €'],
+                        status: 'Terminé',
                     },
                 ]
             }
