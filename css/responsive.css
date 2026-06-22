@@ -1,0 +1,95 @@
+/* ── RESPONSIVE (Fusion) ── */
+@media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .hero h1 { letter-spacing: -2px; font-size: 5.3svh; }
+    .hero-stats { gap: 1.5rem; }
+    .hero-mascot { width: 130px; }
+    .hero-mascot-right { width: 110px; }
+    .partner-layout { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+
+    /* ── ÉQUIPE : grilles ── */
+    .bureau-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    .members-section {
+        padding: 0 1rem 5rem;
+    }
+
+    /* ── ÉQUIPE : grande carte (bureau) ── */
+    .member-card { border-radius: 14px; }
+
+    .card-photo {
+        height: 200px;          /* hauteur fixe stable */
+        overflow: hidden;
+    }
+    .card-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;       /* coupe proprement, pas de déformation */
+        object-position: center top; /* cadre sur le visage */
+        display: block;
+    }
+    .card-photo-fallback {
+        height: 100%;
+    }
+
+    /* ── ÉQUIPE : petite carte (membres) ── */
+    .member-card-sm { border-radius: 12px; }
+
+    .card-photo-sm {
+        height: 140px;
+        overflow: hidden;
+    }
+    .card-photo-sm img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+    .card-photo-fallback-sm {
+        height: 100%;
+        font-size: 1.4rem;
+    }
+
+    /* ── ÉQUIPE : texte des cartes ── */
+    .card-body { padding: 0.9rem 1rem 1rem; }
+    .card-name { font-size: 0.95rem; }
+    .card-promo { font-size: 0.7rem; }
+
+    .card-body-sm { padding: 0.55rem 0.65rem 0.7rem; }
+    .card-name-sm { font-size: 0.8rem; }
+    .card-firstname-sm { font-size: 0.72rem; }
+    .card-promo-sm { font-size: 0.62rem; }
+    .card-role-sm { font-size: 0.6rem; }
+
+    /* ── ÉQUIPE : badge rôle ── */
+    .card-role-badge {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.55rem;
+    }
+
+    /* ── Hero counts ── */
+    .hero-counts { flex-wrap: wrap; gap: 1px; }
+    .count-item { padding: 0.5rem 1rem; }
+    .count-num { font-size: 1.2rem; }
+    .count-label { font-size: 0.62rem; }
+}
+
+@media (max-width: 420px) {
+    /* Sur très petits écrans : 1 seule colonne pour le bureau, 2 pour membres */
+    .bureau-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+    .card-photo { height: 160px; }
+    .card-photo-sm { height: 120px; }
+}

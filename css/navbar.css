@@ -1,0 +1,179 @@
+/* ── NAVBAR (Priorité CSS 1) ── */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(4, 14, 28, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(55, 138, 221, 0.18);
+    transition: all 0.3s;
+}
+
+.nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+    margin-bottom: 1svh;
+    text-decoration: none;
+}
+
+.nav-logo span {
+    color: var(--blue-200);
+}
+
+.nav-logo img {
+    width: 7svh;
+    height: auto;
+    margin-right: 0.5rem;
+    margin-bottom: -2.5svh;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent);
+}
+
+.nav-cta {
+    background: var(--blue-600);
+    color: #fff !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    transition: background 0.2s !important;
+}
+
+.nav-cta:hover {
+    background: var(--blue-400) !important;
+    color: #fff !important;
+}
+
+/* ── BURGER MENU ── */
+.burger-btn {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.burger-btn:hover { background: rgba(55, 138, 221, 0.15); }
+.burger-bar {
+    width: 22px;
+    height: 2px;
+    background: var(--muted);
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+}
+.burger-btn.open .burger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: var(--accent);
+}
+.burger-btn.open .burger-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.burger-btn.open .burger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: var(--accent);
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: rgba(4, 14, 28, 0.98);
+    border-bottom: 1px solid rgba(55, 138, 221, 0.18);
+    backdrop-filter: blur(16px);
+    padding: 0.5rem 1.5rem 1.25rem;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    margin-top: 2svh ;
+}
+.mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+.mobile-menu .menu-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.mobile-menu .menu-link:hover,
+.mobile-menu .menu-link.active { background: rgba(55,138,221,0.1); color: var(--accent); }
+.mobile-menu .menu-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(55,138,221,0.3);
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+.mobile-menu .menu-link.active .menu-dot,
+.mobile-menu .menu-link:hover .menu-dot { background: var(--accent); }
+.mobile-menu .menu-divider {
+    height: 1px;
+    background: rgba(55, 138, 221, 0.12);
+    margin: 0.5rem 0;
+}
+.mobile-menu .menu-cta {
+    display: block;
+    background: var(--blue-600);
+    color: #fff;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 0.25rem;
+    transition: background 0.2s;
+}
+.mobile-menu .menu-cta:hover { background: var(--blue-400); }
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .burger-btn { display: flex; }
+    .mobile-menu { display: block; }
+}

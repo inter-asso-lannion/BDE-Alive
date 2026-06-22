@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDE Alive - Boutique</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/hero.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <div id="app">
+
+        <app-navbar :base-path="basePath"></app-navbar>
+
+        <!-- HERO -->
+        <header class="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-orb"></div>
+            <div class="hero-bg-text">SHOP</div>
+            <img :src="basePath + 'assets/logo_blanc.png'" class="hero-mascot hero-mascot-left" alt="mascotte">
+            <img :src="basePath + 'assets/logo_blanc.png'" class="hero-mascot hero-mascot-right" alt="mascotte">
+            <div class="hero-content">
+                <div class="hero-eyebrow">BDE Alive — Promo 2026/2027</div>
+                <h1>La<br><em>Boutique</em></h1>
+                <p class="hero-desc">Pulls, cartes partenaires, goodies… tout ce qu'il faut pour représenter la filière avec style.</p>
+                <div class="hero-counts">
+                    <div class="count-item">
+                        <div class="count-num">{{ products.filter(p => p.status === 'disponible').length }}</div>
+                        <div class="count-label">Disponibles</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-num">{{ products.filter(p => p.status === 'bientot').length }}</div>
+                        <div class="count-label">Bientôt</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-num">{{ products.length }}</div>
+                        <div class="count-label">Produits</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- BOUTIQUE -->
+        <main class="shop-section">
+
+            <div class="shop-info-banner reveal">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Les commandes se font via <strong>HelloAsso</strong>. Clique sur un article disponible pour être redirigé.</span>
+            </div>
+
+            <!-- Filtres -->
+            <div class="shop-filters reveal">
+                <button
+                    v-for="cat in categories"
+                    :key="cat"
+                    class="pf-btn"
+                    :class="{ active: activeFilter === cat }"
+                    @click="activeFilter = cat"
+                >{{ cat }}</button>
+            </div>
+
+            <!-- Grille -->
+            <div class="shop-grid">
+                <a
+                    v-for="(product, index) in filteredProducts"
+                    :key="product.id"
+                    :href="product.status === 'disponible' ? basePath + product.url : null"
+                    :target="product.status === 'disponible' ? '_blank' : null"
+                    rel="noopener noreferrer"
+                    class="shop-card reveal"
+                    :class="[
+                        'reveal-delay-' + ((index % 5) + 1),
+                        product.status !== 'disponible' ? 'disabled-card' : ''
+                    ]"
+                >
+                    <!-- Image -->
+                    <div class="shop-img-wrap">
+                        <img v-if="product.image" :src="basePath + product.image" :alt="product.title">
+                        <div v-else class="shop-img-fallback">{{ product.emoji }}</div>
+                        <div class="shop-img-overlay"></div>
+                        <div class="shop-badge" :class="'badge-' + product.status">
+                            {{ { disponible: 'Disponible', bientot: 'Bientôt', epuise: 'Épuisé' }[product.status] }}
+                        </div>
+                    </div>
+
+                    <!-- Corps -->
+                    <div class="shop-body">
+                        <div class="shop-category" :style="{ color: product.color }">{{ product.category }}</div>
+                        <div class="shop-title">{{ product.title }}</div>
+                        <p class="shop-desc">{{ product.desc }}</p>
+
+                        <div v-if="product.variants && product.variants.length" class="shop-variants">
+                            <span class="variant-chip" v-for="v in product.variants" :key="v">{{ v }}</span>
+                        </div>
+
+                        <div class="shop-footer">
+                            <div class="shop-price">
+                                {{ product.price }}€
+                                <small v-if="product.priceNote">{{ product.priceNote }}</small>
+                            </div>
+                            <div class="shop-arrow">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- CTA -->
+            <div class="partner-become reveal">
+                <i class="fa-solid fa-question-circle"></i>
+                <div class="partner-become-text">
+                    <strong>Une question sur une commande ?</strong>
+                    <span>Contacte-nous directement sur Instagram ou par mail.</span>
+                </div>
+                <a :href="basePath + '#contact'" class="btn-outline" style="white-space: nowrap;">Nous contacter</a>
+            </div>
+
+        </main>
+
+        <app-footer :base-path="basePath"></app-footer>
+
+    </div>
+
+    <script type="module" src="../js/app-boutique.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDE Alive - Equipe</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/hero.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <div id="app">
+
+        <app-navbar :base-path="basePath"></app-navbar>
+
+        <header class="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-orb"></div>
+            <div class="hero-bg-text">TEAM</div>
+
+            <img :src="basePath + 'assets/logo_blanc.png'" class="hero-mascot hero-mascot-left" alt="mascotte">
+            <img :src="basePath + 'assets/logo_blanc.png'" class="hero-mascot hero-mascot-right" alt="mascotte">
+
+            <div class="hero-content">
+                <div class="hero-eyebrow">BDE Alive — Promo 2026/2027</div>
+                <h1>Notre<br><em>Équipe</em></h1>
+                <p class="hero-desc">Ceux qui font tourner la machine. Du code aux soirées, chaque membre apporte sa patte à l'aventure du BDE Alive.</p>
+
+                <div class="hero-counts">
+                    <div class="count-item">
+                        <div class="count-num">{{ countBureau }}</div>
+                        <div class="count-label">Bureau</div>
+                    </div>
+
+                    <div class="count-item">
+                        <div class="count-num">{{ membersWithRole.length }}</div>
+                        <div class="count-label">Membres actifs</div>
+                    </div>
+
+                    <div class="count-item">
+                        <div class="count-num">{{ membersWithoutRole.length }}</div>
+                        <div class="count-label">Membres</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="members-section">
+
+    <template v-if="groupBureau.length > 0">
+        <div class="bureau-label reveal"><span>Bureau exécutif</span></div>
+        <div class="bureau-grid">
+            <div v-for="(member, index) in groupBureau" :key="member.id" class="member-card reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-glow"></div>
+                <div class="card-photo" :style="member.photo ? { backgroundImage: 'url(' + basePath + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass">{{ member.role }}</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-name"><span class="card-firstname">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo">{{ member.promoText }}</div>
+                </div>
+            </div>
+        </template>
+
+    <template v-if="groupTreso.length > 0">
+        <div class="bureau-label reveal"><span>Trésorerie</span></div>
+        <div class="members-grid"> <div v-for="(member, index) in groupTreso" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + basePath + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass" style="font-size: 0.7rem; padding: 2px 8px;">{{ member.role }}</div>
+                </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template v-if="groupComm.length > 0">
+        <div class="bureau-label reveal"><span>Communication</span></div>
+        <div class="members-grid">
+            <div v-for="(member, index) in groupComm" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + basePath + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass" style="font-size: 0.7rem; padding: 2px 8px;">{{ member.role }}</div>
+                </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template v-if="groupEvents.length > 0">
+        <div class="bureau-label reveal"><span>Évènementiel</span></div>
+        <div class="members-grid">
+            <div v-for="(member, index) in groupEvents" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + basePath + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                    <div class="card-role-badge" :class="member.roleClass" style="font-size: 0.7rem; padding: 2px 8px;">{{ member.role }}</div>
+                </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template v-if="groupMembres.length > 0">
+        <div class="bureau-label reveal"><span>Membres actifs</span></div>
+        <div class="members-grid">
+            <div v-for="(member, index) in groupMembres" :key="member.id" class="member-card-sm reveal" :class="'reveal-delay-' + ((index % 5) + 1)">
+                <div class="card-photo-sm" :style="member.photo ? { backgroundImage: 'url(' + basePath + member.photo + ')', backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+                    <div v-if="!member.photo" class="card-photo-fallback-sm" :class="member.roleClass">{{ getInitials(member.firstName, member.lastName) }}</div>
+                </div>
+                <div class="card-body-sm">
+                    <div class="card-name-sm"><span class="card-firstname-sm">{{ member.firstName }}</span> {{ member.lastName }}</div>
+                    <div class="card-promo-sm">{{ member.promoText }}</div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</main>
+
+        <app-footer :base-path="basePath"></app-footer>
+
+    </div>
+
+    <script type="module" src="../js/app-equipe.js"></script>
+</body>
+</html>
