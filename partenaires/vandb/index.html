@@ -4,49 +4,26 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BDE Alive — Partenaire VandB</title>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
-        <link rel="stylesheet" href="../style.css">
+        <link rel="shortcut icon" href="../../assets/logo.png" type="image/x-icon">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/base.css">
+        <link rel="stylesheet" href="../../css/navbar.css">
+        <link rel="stylesheet" href="../../css/hero.css">
+        <link rel="stylesheet" href="../../css/components.css">
+        <link rel="stylesheet" href="../../css/sections.css">
+        <link rel="stylesheet" href="../../css/footer.css">
+        <link rel="stylesheet" href="../../css/animations.css">
+        <link rel="stylesheet" href="../../css/responsive.css">
+        <link rel="stylesheet" href="../../css/partner-detail.css">
     </head>
     <body class="partner-vandb">
         <div id="app">
 
-            <!-- NAVBAR -->
-            <nav>
-                <a href="../index.html" class="nav-logo-link">
-                    <div class="nav-logo">
-                        <img src="../img/logo.png">
-                        BDE<span> Alive</span>
-                    </div>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="../equipe.html">Équipe</a></li>
-                    <li><a href="../projets.html">Projets</a></li>
-                    <li><a href="../partenaires.html" class="active">Partenaires</a></li>
-                    <li><a href="../boutique.html">Boutique</a></li>
-                    <li><a href="../index.html#contact">Contact</a></li>
-                </ul>
-                    <!-- BURGER BUTTON (mobile) -->
-                <button class="burger-btn" id="burgerBtn" aria-label="Menu" onclick="toggleBurger()">
-                    <div class="burger-bar"></div>
-                    <div class="burger-bar"></div>
-                    <div class="burger-bar"></div>
-                </button>
-            </nav>
-
-            <!-- MOBILE MENU -->
-            <div class="mobile-menu" id="mobileMenu">
-                <a class="menu-link" href="../index.html"><div class="menu-dot"></div>Accueil</a>
-                <a class="menu-link" href="../equipe.html"><div class="menu-dot"></div>Équipe</a>
-                <a class="menu-link" href="../projets.html"><div class="menu-dot"></div>Projets</a>
-                <a class="menu-link active" href="../partenaires.html"><div class="menu-dot"></div>Partenaires</a>
-                <a class="menu-link" href="../boutique.html"><div class="menu-dot"></div>Boutique</a>
-                <div class="menu-divider"></div>
-                <a class="menu-cta" href="../index.html#contact">Contact</a>
-            </div>
+            <app-navbar :base-path="basePath"></app-navbar>
 
             <!-- HERO -->
             <header class="partner-hero">
@@ -57,16 +34,16 @@
                 <div class="partner-hero-content">
                     <!-- Breadcrumb -->
                     <div class="breadcrumb">
-                        <a href="../index.html">Accueil</a>
+                        <a :href="basePath">Accueil</a>
                         <i class="fa-solid fa-chevron-right"></i>
-                        <a href="../partenaires.html">Partenaires</a>
+                        <a :href="basePath + 'partenaires/'">Partenaires</a>
                         <i class="fa-solid fa-chevron-right"></i>
                         <span>VandB</span>
                     </div>
 
                     <!-- Logo -->
                     <div class="partner-logo-wrap">
-                        <img src="../img/partenaires/vandb.jpg" alt="VandB" onerror="this.parentElement.innerHTML='<div class=\'partner-logo-wrap-fallback\'><i class=\'fa-solid fa-drumstick-bite\'></i></div>'">
+                        <img src="../../assets/partenaires/vandb.jpg" alt="VandB" onerror="this.parentElement.innerHTML='<div class=\'partner-logo-wrap-fallback\'><i class=\'fa-solid fa-drumstick-bite\'></i></div>'">
                     </div>
 
                     <!-- Badge -->
@@ -89,7 +66,7 @@
             <main class="partner-main">
 
                 <!-- Retour -->
-                <a href="../partenaires.html" class="partner-back reveal">
+                <a :href="basePath + 'partenaires/'" class="partner-back reveal">
                     <i class="fa-solid fa-arrow-left"></i>
                     Retour aux partenaires
                 </a>
@@ -188,76 +165,9 @@
 
             </main>
 
-            <!-- FOOTER -->
-            <footer>
-                <div class="footer-top">
-                    <div class="footer-brand">
-                        <div class="nav-logo">BDE <span>Alive</span></div>
-                        <p>Le BDE qui code autant qu'il fête. Rejoins-nous et fais partie de l'aventure informatique de ta promo.</p>
-                    </div>
-                    <div class="footer-links">
-                        <div class="footer-col">
-                            <h4>Navigation</h4>
-                            <ul>
-                                <li><a href="../equipe.html">Notre équipe</a></li>
-                                <li><a href="../projets.html">Projets</a></li>
-                                <li><a href="../projets.html">Soirées</a></li>
-                                
-                            </ul>
-                        </div>
-                        <div class="footer-col">
-                            <h4>Ressources</h4>
-                            <ul>
-                                <li><a href="../boutique.html">Boutique</a></li>
-                                <li><a href="https://www.instagram.com/bde.info.alive/">Instagram</a></li>
-                                <li><a href="https://discord.gg/yeB7ttZG3j">Discord</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-col">
-                            <h4>Info</h4>
-                            <ul>
-                                <li><a href="../index.html#contact">Devenir membre</a></li>
-                                <li><a href="../index.html#contact">Partenaires</a></li>
-                                <li><a href="../index.html#contact">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <span>© 2025 BDE Alive — Tous droits réservés</span>
-                    <div class="footer-socials">
-                        <a class="social-btn" href="../index.html#contact"><i class="fa-solid fa-envelope"></i></a>
-                        <a class="social-btn" href="https://discord.gg/yeB7ttZG3j"><i class="fa-brands fa-discord"></i></a>
-                        <a class="social-btn" href="https://www.instagram.com/bde.info.alive/"><i class="fa-brands fa-instagram"></i></a>
-                    </div>
-                </div>
-            </footer>
+            <app-footer :base-path="basePath"></app-footer>
         </div>
 
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-        <script>
-            const { createApp } = Vue;
-            createApp({
-                mounted() {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-                    }, { threshold: 0.1 });
-                    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-                }
-            }).mount('#app');
-        </script>
-        <script>
-            function toggleBurger() {
-                document.getElementById('burgerBtn').classList.toggle('open');
-                document.getElementById('mobileMenu').classList.toggle('open');
-            }
-            // Ferme le menu si on clique ailleurs
-            document.addEventListener('click', e => {
-                if (!e.target.closest('nav') && !e.target.closest('.mobile-menu')) {
-                    document.getElementById('burgerBtn').classList.remove('open');
-                    document.getElementById('mobileMenu').classList.remove('open');
-                }
-            });
-        </script>
+        <script type="module" src="../../js/app-partner-detail.js"></script>
     </body>
 </html>

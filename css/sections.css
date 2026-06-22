@@ -1,0 +1,750 @@
+/* ── SECTIONS GÉNÉRIQUES (CSS 1) ── */
+section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+}
+
+.section-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 3rem;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(55, 138, 221, 0.3), transparent);
+    margin: 0;
+}
+
+.section-label a { color: var(--accent); }
+
+/* ── TEAM SIMPLE (CSS 1) ── */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.team-card {
+    background: var(--bg2);
+    border: 1px solid rgba(55, 138, 221, 0.15);
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: default;
+}
+
+.team-card:hover {
+    border-color: rgba(55, 138, 221, 0.5);
+    transform: translateY(-4px);
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.avatar-blue   { background: rgba(55, 138, 221, 0.2);  color: var(--blue-200); }
+.avatar-cyan   { background: rgba(0, 212, 255, 0.15);  color: var(--accent); }
+.avatar-purple { background: rgba(140, 90, 255, 0.15); color: #B69AFF; }
+.avatar-teal   { background: rgba(29, 158, 117, 0.2);  color: #5DCAA5; }
+.avatar-coral  { background: rgba(216, 90, 48, 0.2);   color: #F0997B; }
+
+.team-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 0.2rem;
+}
+
+.team-role {
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}
+
+.team-bio {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.team-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+.skill-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: rgba(55, 138, 221, 0.12);
+    border: 1px solid rgba(55, 138, 221, 0.25);
+    color: var(--blue-200);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+}
+
+/* ── MEMBERS GRID AVANCÉ (CSS 2) ── */
+.members-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem 8rem;
+}
+
+.bureau-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.bureau-label span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.bureau-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(55,138,221,0.3), transparent);
+}
+
+.bureau-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.member-card {
+    background: var(--bg2);
+    border: 1px solid rgba(55, 138, 221, 0.12);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+    position: relative;
+}
+
+.member-card:hover {
+    border-color: rgba(55, 138, 221, 0.45);
+    transform: translateY(-6px);
+}
+
+.member-card:hover .card-glow { opacity: 1; }
+
+.card-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at top, rgba(0, 212, 255, 0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.card-photo {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background: var(--bg3);
+}
+
+.card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+    filter: saturate(0.85);
+}
+
+.member-card:hover .card-photo img {
+    transform: scale(1.06);
+    filter: saturate(1);
+}
+
+.card-photo-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.card-role-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    backdrop-filter: blur(50px);
+    z-index: 2;
+}
+
+.card-photo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(transparent, rgba(7, 21, 37, 0.8));
+}
+
+.card-body {
+    padding: 1.25rem 1.4rem 1.4rem;
+}
+
+.card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+}
+
+.card-firstname {
+    font-weight: 400;
+    color: var(--blue-200);
+}
+
+.card-promo {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.card-promo::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+}
+
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20svh, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    align-items: stretch;
+}
+
+.member-card-sm {
+    background: var(--bg2);
+    border: 1px solid rgba(55, 138, 221, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: default;
+}
+
+.member-card-sm:hover {
+    border-color: rgba(55, 138, 221, 0.35);
+    transform: translateY(-4px);
+}
+
+.card-photo-sm {
+    height: 170px;
+    overflow: hidden;
+    background: var(--bg3);
+    position: relative;
+}
+
+.card-photo-sm img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.8);
+    transition: transform 0.4s ease, filter 0.4s;
+}
+
+.member-card-sm:hover .card-photo-sm img {
+    transform: scale(1.08);
+    filter: saturate(1);
+}
+
+.card-photo-sm::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, rgba(7,21,37,0.7));
+}
+
+.card-photo-fallback-sm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.card-body-sm {
+    padding: 0.7rem 0.8rem 0.8rem;
+}
+
+.card-name-sm {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.card-firstname-sm {
+    font-weight: 400;
+    color: var(--blue-200);
+    display: block;
+    font-size: 0.78rem;
+}
+
+.card-promo-sm {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.35rem;
+}
+
+.card-role-sm {
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Thèmes par rôle (CSS 2) */
+.role-president  { background: rgba(0, 212, 255, 0.15);   color: var(--accent); }
+.role-vice       { background: rgba(140, 90, 255, 0.15);  color: #B69AFF; }
+.role-secretaire { background: rgba(55, 138, 221, 0.18);  color: var(--blue-200); }
+.role-treso      { background: rgba(29, 158, 117, 0.15);  color: #5DCAA5; }
+.role-events     { background: rgba(216, 90, 48, 0.18);   color: #F0997B; }
+.role-comm       { background: rgba(186, 117, 23, 0.15);  color: #EF9F27; }
+.role-membre     { background: rgba(55, 138, 221, 0.08);  color: var(--muted); }
+
+.photo-president { background: linear-gradient(145deg, #061828, #0D3050); }
+.photo-vice      { background: linear-gradient(145deg, #100820, #251045); }
+.photo-secretaire{ background: linear-gradient(145deg, #061828, #0A2545); }
+.photo-treso     { background: linear-gradient(145deg, #061A12, #0D3525); }
+.photo-events    { background: linear-gradient(145deg, #1A0A06, #351520); }
+.photo-comm      { background: linear-gradient(145deg, #1A1006, #352210); }
+.photo-membre    { background: linear-gradient(145deg, #080F1A, #101D30); }
+
+/* ── PROJETS PAGE ── */
+.projects-grid-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+a.project-card-full {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+}
+
+.project-card-full {
+    background: var(--bg2);
+    border: 1px solid rgba(55, 138, 221, 0.12);
+    border-radius: 20px;
+    padding: 1.75rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card-full::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at top left, rgba(0,212,255,0.05), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project-card-full:hover {
+    border-color: rgba(55, 138, 221, 0.4);
+    transform: translateY(-5px);
+}
+
+.project-card-full:hover::before { opacity: 1; }
+
+.pcf-soon {
+    border-style: dashed;
+    opacity: 0.85;
+}
+
+.pcf-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.pcf-body {
+    flex: 1;
+    min-width: 0;
+    margin: 20px;
+}
+
+.pcf-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.pcf-type {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pcf-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.pcf-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+}
+
+.pcf-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.pcf-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.pcf-progress-label {
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.pcf-progress-bar {
+    width: 80px;
+    height: 4px;
+    background: rgba(55, 138, 221, 0.15);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.pcf-progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s ease;
+}
+
+.pcf-progress-pct {
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.project-card-sm {
+    background: var(--bg2);
+    border: 1px solid rgba(55, 138, 221, 0.1);
+    border-radius: 16px;
+    padding: 2svh;
+
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s, transform 0.25s;
+}
+
+.project-card-sm:hover {
+    border-color: rgba(55, 138, 221, 0.3);
+    transform: translateY(-4px);
+}
+
+.pcs-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 0.85rem;
+}
+
+.pcs-type {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+}
+
+.pcs-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.4rem;
+}
+
+.pcs-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* ── PARTENAIRES PAGE LISTE ── */
+.partenaires-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem 8rem;
+}
+
+.partner-filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.pf-btn {
+    background: transparent;
+    border: 1px solid rgba(55, 138, 221, 0.2);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.45rem 1.1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.pf-btn:hover { border-color: rgba(55,138,221,0.5); color: var(--blue-200); }
+.pf-btn.active {
+    background: rgba(55, 138, 221, 0.15);
+    border-color: var(--blue-400);
+    color: var(--accent);
+}
+
+.partners-grid-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.partner-card-full {
+    background: var(--bg2);
+    border: 1px solid rgba(55, 138, 221, 0.12);
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    cursor: pointer;
+}
+.partner-card-full:hover {
+    border-color: rgba(55, 138, 221, 0.5);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+.partner-card-full:hover .pcf-glow { opacity: 1; }
+.partner-card-full:hover .pcf-arrow { opacity: 1; transform: translate(2px, -2px); }
+.partner-card-full:hover .pcf-banner-overlay { opacity: 0.5; }
+
+.pcf-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at top, rgba(0,212,255,0.07), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.pcf-banner {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.pcf-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+.pcf-banner-icon {
+    position: relative;
+    z-index: 1;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+.pcf-arrow {
+    position: relative;
+    z-index: 1;
+    color: rgba(255,255,255,0.6);
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+.pcf-category-badge {
+    position: relative;
+    z-index: 1;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+}
+
+.pcf-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+}
+.pcf-desc {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1.1rem;
+}
+.pcf-offre {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(0, 212, 255, 0.07);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem;
+    line-height: 1.5;
+}
+.pcf-offre i { margin-top: 2px; flex-shrink: 0; }
+
+.partner-become {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    background: rgba(55, 138, 221, 0.06);
+    border: 1px dashed rgba(55, 138, 221, 0.28);
+    border-radius: 16px;
+    margin-top: 1rem;
+}
+.partner-become i { color: var(--accent); font-size: 1.3rem; flex-shrink: 0; }
+.partner-become-text { flex: 1; }
+.partner-become-text strong { display: block; color: #fff; font-size: 1rem; margin-bottom: 0.2rem; }
+.partner-become-text span { font-size: 0.85rem; color: var(--muted); }

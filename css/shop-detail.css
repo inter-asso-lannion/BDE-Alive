@@ -1,0 +1,307 @@
+.product-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 7rem 2rem 6rem;
+}
+
+.product-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s;
+}
+.product-back:hover { color: var(--accent); }
+.product-back i { font-size: 0.75rem; transition: transform 0.2s; }
+.product-back:hover i { transform: translateX(-3px); }
+
+.product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* ── GALERIE ── */
+.gallery-main {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--bg2);
+    border: 1px solid rgba(55,138,221,0.15);
+    margin-bottom: 0.85rem;
+    position: relative;
+}
+
+.gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.gallery-main img.fade-out {
+    opacity: 0;
+    transform: scale(1.03);
+}
+
+.gallery-main-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+}
+
+.gallery-thumbs {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.gallery-thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: var(--bg2);
+    transition: border-color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.7);
+    transition: filter 0.2s;
+}
+
+.gallery-thumb:hover img { filter: saturate(1); }
+
+.gallery-thumb.active {
+    border-color: var(--accent);
+}
+
+.gallery-thumb.active img { filter: saturate(1); }
+
+/* ── INFOS PRODUIT ── */
+.product-info { padding-top: 0.5rem; }
+
+.product-category {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+}
+
+.product-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+}
+
+.product-price-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+}
+
+.product-divider {
+    height: 1px;
+    background: rgba(55,138,221,0.12);
+    margin: 1.5rem 0;
+}
+
+/* ── SECTION LABEL ── */
+.option-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.option-label strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* ── COLORIS ── */
+.color-swatches {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.color-swatch {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    outline: 2px solid transparent;
+    transition: outline-color 0.2s, transform 0.15s, border-color 0.2s;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.color-swatch:hover { transform: scale(1.12); }
+
+.color-swatch.active {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* ── TAILLES ── */
+.size-grid {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+}
+
+.size-btn {
+    min-width: 48px;
+    height: 42px;
+    padding: 0 0.85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(55,138,221,0.25);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.size-btn:hover:not(.unavailable) {
+    border-color: var(--blue-400);
+    color: var(--blue-200);
+}
+
+.size-btn.active {
+    background: rgba(55,138,221,0.2);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.size-btn.unavailable {
+    opacity: 0.3;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* ── CTA ── */
+.btn-helloasso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: var(--blue-400);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    margin-bottom: 0.85rem;
+}
+
+.btn-helloasso:hover {
+    background: var(--blue-600);
+    transform: translateY(-2px);
+}
+
+.btn-helloasso i { font-size: 0.9rem; }
+
+.cta-note {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.cta-note i { color: var(--accent); font-size: 0.7rem; }
+
+/* ── DESCRIPTION ── */
+.product-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.75;
+}
+
+/* ── INFOS PRATIQUES ── */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.detail-row i {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: rgba(55,138,221,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .product-page { padding: 5.5rem 1rem 4rem; }
+    .product-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .gallery { position: static; }
+    .gallery-thumb { width: 58px; height: 58px; }
+}

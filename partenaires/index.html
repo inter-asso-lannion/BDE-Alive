@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDE Alive - Partenaires</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/hero.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/sections.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<div id="app">
+
+    <app-navbar :base-path="basePath"></app-navbar>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-orb"></div>
+        <div class="hero-bg-text">DEAL</div>
+
+        <img :src="basePath + 'assets/logo_blanc.png'" class="hero-mascot hero-mascot-left" alt="mascotte">
+        <img :src="basePath + 'assets/logo_blanc.png'" class="hero-mascot hero-mascot-right" alt="mascotte">
+
+        <div class="hero-content">
+            <div class="hero-eyebrow">BDE Alive — Promo 2026/2027</div>
+            <h1>Nos<br><em>Partenaires</em></h1>
+            <p class="hero-desc">Ta carte BDE Alive, c'est ton pass pour des réductions exclusives. Restauration, sorties, services — ils sont là pour toi.</p>
+
+            <div class="hero-counts">
+                <div class="count-item">
+                    <div class="count-num">{{ partners.length }}</div>
+                    <div class="count-label">Partenaires</div>
+                </div>
+                <div class="count-item">
+                    <div class="count-num">{{ categories.length - 1 }}</div>
+                    <div class="count-label">Catégories</div>
+                </div>
+                <div class="count-item">
+                    <div class="count-num">20€</div>
+                    <div class="count-label">Carte BDE</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION PRINCIPALE -->
+    <main class="partenaires-section">
+
+        <!-- Filtres -->
+        <div class="partner-filters reveal">
+            <button
+                v-for="cat in categories"
+                :key="cat"
+                class="pf-btn"
+                :class="{ active: activeFilter === cat }"
+                @click="activeFilter = cat"
+            >{{ cat }}</button>
+        </div>
+
+        <!-- Grille -->
+        <div class="partners-grid-full">
+            <a
+                v-for="(partner, index) in filteredPartners"
+                :key="partner.name"
+                :href="basePath + partner.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="partner-card-full reveal"
+                :class="'reveal-delay-' + ((index % 5) + 1)"
+            >
+                <div class="pcf-glow"></div>
+
+                <!-- Bannière -->
+                <div class="pcf-banner" :style="{ background: partner.bannerBg }">
+                    <div class="pcf-banner-overlay"></div>
+                    <div class="pcf-banner-icon">
+                        <img v-if="partner.logo" :src="basePath + partner.logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px;">
+                        <i v-else :class="partner.icon" :style="{ color: partner.color }"></i>
+                    </div>
+                    <div class="pcf-category-badge">{{ partner.category }}</div>
+                    <i class="fa-solid fa-arrow-up-right-from-square pcf-arrow"></i>
+                </div>
+
+                <!-- Corps -->
+                <div class="pcf-body">
+                    <div class="pcf-name">{{ partner.name }}</div>
+                    <p class="pcf-desc">{{ partner.desc }}</p>
+                    <div class="pcf-offre">
+                        <i class="fa-solid fa-tag"></i>
+                        {{ partner.offre }}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- CTA devenir partenaire -->
+        <div class="partner-become reveal">
+            <i class="fa-solid fa-handshake"></i>
+            <div class="partner-become-text">
+                <strong>Vous souhaitez devenir partenaire ?</strong>
+                <span>Rejoignez notre réseau et profitez d'une visibilité auprès de toute la filière informatique.</span>
+            </div>
+            <a :href="basePath + '#contact'" class="btn-outline" style="white-space: nowrap;">Nous contacter</a>
+        </div>
+
+    </main>
+
+    <app-footer :base-path="basePath"></app-footer>
+
+</div>
+
+<script type="module" src="../js/app-partenaires.js"></script>
+</body>
+</html>

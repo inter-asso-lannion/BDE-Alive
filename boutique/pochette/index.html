@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDE Alive - Pochette</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="shortcut icon" href="../../assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/variables.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/hero.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/sections.css">
+    <link rel="stylesheet" href="../../css/footer.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/shop-detail.css">
+</head>
+<body>
+<div id="app">
+
+    <app-navbar :base-path="basePath"></app-navbar>
+
+    <!-- PAGE PRODUIT -->
+    <main class="product-page">
+
+        <a :href="basePath + 'boutique/'" class="product-back">
+            <i class="fa-solid fa-arrow-left"></i> Retour à la boutique
+        </a>
+
+        <div class="product-layout">
+
+            <!-- ── GALERIE ── -->
+            <div class="gallery">
+                <div class="gallery-main">
+                    <img
+                        v-if="activeImage"
+                        :src="activeImage"
+                        :alt="product.title"
+                        ref="mainImg"
+                    >
+                    <div v-else class="gallery-main-fallback">{{ product.emoji }}</div>
+                </div>
+
+                <div class="gallery-thumbs">
+                    <div
+                        v-for="(img, i) in currentImages"
+                        :key="i"
+                        class="gallery-thumb"
+                        :class="{ active: activeImageIndex === i }"
+                        @click="selectImage(i)"
+                    >
+                        <img :src="img" :alt="product.title + ' vue ' + (i+1)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── INFOS ── -->
+            <div class="product-info">
+                <div class="product-category">{{ product.category }}</div>
+                <div class="product-title">{{ product.title }}</div>
+                <div class="product-price">{{ product.price }}€</div>
+                <div class="product-price-note">{{ product.priceNote }}</div>
+
+                <div class="product-divider"></div>
+
+                <!-- Coloris -->
+                <div class="option-label">
+                    Coloris — <strong>{{ selectedColor ? selectedColor.name : '—' }}</strong>
+                </div>
+                <div class="color-swatches">
+                    <div
+                        v-for="color in product.colors"
+                        :key="color.name"
+                        class="color-swatch"
+                        :class="{ active: selectedColor && selectedColor.name === color.name }"
+                        :style="{ background: color.hex }"
+                        :title="color.name"
+                        @click="selectColor(color)"
+                    ></div>
+                </div>
+
+                <!-- Tailles -->
+                <div class="option-label">Taille — <strong>{{ selectedSize || '—' }}</strong></div>
+                <div class="size-grid">
+                    <button
+                        v-for="size in product.sizes"
+                        :key="size.label"
+                        class="size-btn"
+                        :class="{
+                            active: selectedSize === size.label,
+                            unavailable: !size.available
+                        }"
+                        @click="size.available && (selectedSize = size.label)"
+                    >{{ size.label }}</button>
+                </div>
+
+                <div class="product-divider"></div>
+
+                <!-- CTA HelloAsso -->
+                <a
+                    :href="product.helloAssoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-helloasso"
+                >
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    Commander sur HelloAsso
+                </a>
+                <div class="cta-note">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Paiement sécurisé — livraison à l'IUT
+                </div>
+
+                <div class="product-divider"></div>
+
+                <!-- Description -->
+                <p class="product-desc">{{ product.desc }}</p>
+
+                <div class="product-divider"></div>
+
+                <!-- Infos pratiques -->
+                <div class="product-details">
+                    <div class="detail-row" v-for="detail in product.details" :key="detail.text">
+                        <i :class="detail.icon"></i>
+                        <span>{{ detail.text }}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <app-footer :base-path="basePath"></app-footer>
+
+</div>
+
+<script type="module" src="../../js/app-product.js"></script>
+</body>
+</html>
