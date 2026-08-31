@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BDE Alive - Pochette</title>
+    <title>BDE Alive - Carte Partenaires</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./../style.css">
+    <style>
+        .product-price-old {
+            font-size: 0.55em;
+            font-weight: 400;
+            text-decoration: line-through;
+            opacity: 0.5;
+            margin-left: 0.4em;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
@@ -86,40 +95,21 @@
             <div class="product-info">
                 <div class="product-category">{{ product.category }}</div>
                 <div class="product-title">{{ product.title }}</div>
-                <div class="product-price">{{ product.price }}€</div>
+                <div class="product-price">
+                    {{ product.price }}€
+                    <span v-if="product.oldPrice" class="product-price-old">{{ product.oldPrice }}€</span>
+                </div>
                 <div class="product-price-note">{{ product.priceNote }}</div>
 
                 <div class="product-divider"></div>
 
-                <!-- Coloris -->
-                <div class="option-label">
-                    Coloris — <strong>{{ selectedColor ? selectedColor.name : '—' }}</strong>
-                </div>
-                <div class="color-swatches">
-                    <div
-                        v-for="color in product.colors"
-                        :key="color.name"
-                        class="color-swatch"
-                        :class="{ active: selectedColor && selectedColor.name === color.name }"
-                        :style="{ background: color.hex }"
-                        :title="color.name"
-                        @click="selectColor(color)"
-                    ></div>
-                </div>
-
-                <!-- Tailles -->
-                <div class="option-label">Taille — <strong>{{ selectedSize || '—' }}</strong></div>
-                <div class="size-grid">
-                    <button
-                        v-for="size in product.sizes"
-                        :key="size.label"
-                        class="size-btn"
-                        :class="{
-                            active: selectedSize === size.label,
-                            unavailable: !size.available
-                        }"
-                        @click="size.available && (selectedSize = size.label)"
-                    >{{ size.label }}</button>
+                <!-- Avantages / partenaires -->
+                <div class="option-label">Avantages inclus</div>
+                <div class="product-details">
+                    <div class="detail-row" v-for="perk in product.perks" :key="perk.text">
+                        <i :class="perk.icon"></i>
+                        <span>{{ perk.text }}</span>
+                    </div>
                 </div>
 
                 <div class="product-divider"></div>
@@ -136,7 +126,7 @@
                 </a>
                 <div class="cta-note">
                     <i class="fa-solid fa-circle-check"></i>
-                    Paiement sécurisé — livraison à l'IUT
+                    Paiement sécurisé — remise à l'IUT
                 </div>
 
                 <div class="product-divider"></div>
@@ -204,7 +194,7 @@
 </div>
 
 <script>
-const { createApp, ref, computed, watch } = Vue;
+const { createApp, ref, computed } = Vue;
 
 createApp({
     setup() {
@@ -213,66 +203,47 @@ createApp({
         // DONNÉES PRODUIT
         // ═══════════════════════════════════════════════════════════════
         const product = {
-            title: 'Pochette BDE Alive',
-            category: 'Pochettes',
-            emoji: '🎒',
+            title: 'Carte Partenaires BDE Alive',
+            category: 'Cartes',
+            emoji: '💳',
             price: 15,
-            priceNote: 'Livraison incluse à l\'IUT',
-            helloAssoUrl: 'https://www.helloasso.com/associations/inter-asso/boutiques/info-pochette-pc',
+            oldPrice: 20,
+            priceNote: 'Prix officiel 20€ — en promo à 15€ jusqu\'au 1er Octobre 2026',
+            helloAssoUrl: 'https://www.helloasso.com/associations/inter-asso/boutiques/info-carte-partenaire',
 
-            desc: 'La pochette officielle du BDE Alive. Gravure Laser. Matière 100% polyester. La livraison se fait directement à l\'IUT avec les membres du BDE.',
+            desc: 'La carte officielle du BDE Alive qui te donne accès à des réductions exclusives chez nos partenaires : restaurants, bars, commerces et loisirs autour du campus. Présente-la simplement lors de ton achat pour en profiter.',
 
-            // Tailles — met available: false pour griser une taille
-            sizes: [
-                { label: '13-14',   available: true  },
-                { label: '15-16',   available: true  },
-                { label: '17-18',   available: false },
+            // Avantages mis en avant en haut de la fiche
+            perks: [
+                { icon: 'fa-solid fa-percent',   text: 'Réductions chez tous nos partenaires' },
+                { icon: 'fa-solid fa-store',     text: 'Commerces, restaurants, bars' },
+                { icon: 'fa-solid fa-infinity',  text: 'Utilisation illimitée' },
             ],
 
-            // Coloris — hex + tableau d'images par couleur
-            colors: [
-                {
-                    name: 'Marine',
-                    hex: '#1B2A4A',
-                    images: [
-                        '../img/shop/pochette.jpg',
-                    ]
-                },
+            // Photo(s) de la carte
+            images: [
+                '../img/shop/carte.jpg',
             ],
 
             // Infos pratiques affichées en bas
             details: [
-                { icon: 'fa-solid fa-shirt',            text: '100% polyester' },
-                { icon: 'fa-solid fa-weight-hanging',   text: 'Poids : 237g' },
-                { icon: 'fa-solid fa-location-dot',     text: 'Livraison à l\'IUT avec les membres du BDE' },
-                { icon: 'fa-solid fa-clock',            text: 'Délai de livraison : 3 à 4 semaines après commande' },
+                { icon: 'fa-solid fa-id-card',          text: 'Carte nominative, non transmissible' },
+                { icon: 'fa-solid fa-location-dot',     text: 'Remise à l\'IUT avec les membres du BDE' },
+                { icon: 'fa-solid fa-clock',            text: 'Délai de remise : sous 1 semaine après commande' },
             ]
         };
         // ═══════════════════════════════════════════════════════════════
 
-        const selectedColor     = ref(product.colors[0]);
-        const selectedSize      = ref(null);
         const activeImageIndex  = ref(0);
         const mainImg           = ref(null);
 
         const currentImages = computed(() =>
-            selectedColor.value?.images?.length ? selectedColor.value.images : []
+            product.images?.length ? product.images : []
         );
 
         const activeImage = computed(() =>
             currentImages.value.length ? currentImages.value[activeImageIndex.value] : null
         );
-
-        function selectColor(color) {
-            if (selectedColor.value?.name === color.name) return;
-            // Fade out → change → fade in
-            if (mainImg.value) mainImg.value.classList.add('fade-out');
-            setTimeout(() => {
-                selectedColor.value   = color;
-                activeImageIndex.value = 0;
-                if (mainImg.value) mainImg.value.classList.remove('fade-out');
-            }, 280);
-        }
 
         function selectImage(index) {
             if (activeImageIndex.value === index) return;
@@ -285,13 +256,10 @@ createApp({
 
         return {
             product,
-            selectedColor,
-            selectedSize,
             activeImageIndex,
             activeImage,
             currentImages,
             mainImg,
-            selectColor,
             selectImage,
         };
     }
