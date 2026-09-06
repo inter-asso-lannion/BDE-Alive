@@ -130,6 +130,7 @@
 
                             <div class="shop-footer">
                                 <div class="shop-price">
+                                    <span v-if="product.oldPrice" class="shop-price-old">{{ product.oldPrice }}€</span>
                                     {{ product.price }}€
                                     <small v-if="product.priceNote">{{ product.priceNote }}</small>
                                 </div>
@@ -235,7 +236,8 @@
                                 emoji: '💳',
                                 image: './img/shop/BDE_Alive.png',
                                 desc: 'Ton pass pour des réductions exclusives chez tous nos partenaires ',
-                                price: 20,
+                                price: 15,
+                                oldPrice: 20,
                                 priceNote: 'livraison à l\'IUT',
                                 status: 'disponible',
                                 variants: [],

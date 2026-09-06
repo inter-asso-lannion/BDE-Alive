@@ -454,6 +454,14 @@ nav {
     line-height: 1;
 }
 
+.count-num-old {
+    font-size: 0.55em;
+    font-weight: 400;
+    text-decoration: line-through;
+    opacity: 0.5;
+    margin-right: 0.25em;
+}
+
 .count-label {
     font-size: 0.72rem;
     color: var(--muted);
@@ -1025,6 +1033,11 @@ section {
     color: var(--accent);
     padding: 0.2rem 0.55rem;
     border-radius: 4px;
+}
+
+.stack-chip-old {
+    text-decoration: line-through;
+    opacity: 0.5;
 }
 
 .project-status {
@@ -2749,6 +2762,14 @@ a.project-card-full {
     font-weight: 800;
     color: var(--accent);
     line-height: 1;
+}
+
+.shop-price-old {
+    font-size: 0.55em;
+    font-weight: 400;
+    text-decoration: line-through;
+    opacity: 0.5;
+    margin-right: 0.4em;
 }
 
 .shop-price small {
